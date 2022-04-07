@@ -10,10 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.OpenEvents">
         <activity
-            android:name=".LogIn_Activity"
-            android:exported="false"
-            android:label="@string/title_activity_log_in"
-            android:theme="@style/Theme.OpenEvents.NoActionBar" />
+            android:name=".Log_In_Activity"
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
