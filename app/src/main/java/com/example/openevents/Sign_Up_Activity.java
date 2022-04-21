@@ -7,6 +7,8 @@ import com.example.openevents.api.APIClient;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.example.openevents.api.APIClient;
+
 import java.util.ArrayList;
 
 import retrofit2.Call;
@@ -17,14 +19,15 @@ public class Sign_Up_Activity extends AppCompatActivity {
 
 
 
+    private ArrayList<String> responseArrayList = new ArrayList<>();
+
     public void setSignUp () {
 
-        APIClient.getInstance().getTodo(new Callback<ArrayList<String>>() {
+        APIClient.getInstance().signUp(new Callback<ArrayList<String>>() {
             @Override
             public void onResponse(Call<ArrayList<String>> call, Response<ArrayList<String>> response) {
                 Log.i("GET","GET WENT WELL!" + response.body());
-                taskArrayList =  response.body();
-                updateUI();
+                responseArrayList =  response.body();
             }
 
             @Override
@@ -33,8 +36,6 @@ public class Sign_Up_Activity extends AppCompatActivity {
             }
         });
     }
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

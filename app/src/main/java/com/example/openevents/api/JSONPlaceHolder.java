@@ -10,9 +10,8 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 public interface JSONPlaceHolder {
-    @GET("users")
-    Call<ArrayList<String>> getTodo();
 
     @POST("users")
-    Call<ArrayList<String>> createPost(@Body JsonObject requestBody);
+    Call<ArrayList<String>> signUp();
+
 }
