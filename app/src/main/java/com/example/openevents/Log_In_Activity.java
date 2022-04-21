@@ -11,7 +11,7 @@ import com.google.android.material.floatingactionbutton.ExtendedFloatingActionBu
 
 public class Log_In_Activity extends AppCompatActivity {
 
-    void changeActivityCreate () {
+    private void changeActivitySignUp () {
         Intent intent = new Intent(this, Sign_Up_Activity.class);
         startActivity(intent);
     }
@@ -22,16 +22,16 @@ public class Log_In_Activity extends AppCompatActivity {
         logInButton.setOnClickListener(new View.OnClickListener() {
                  @Override
                  public void onClick(View view) {
-                     changeActivityCreate();
+                     //changeActivityHome();
                  }
              }
         );
 
-        Button SignUpButton = findViewById(R.id.button_sign_up);
-        SignUpButton.setOnClickListener(new View.OnClickListener() {
+        Button signUpButton = findViewById(R.id.button_sign_up);
+        signUpButton.setOnClickListener(new View.OnClickListener() {
                  @Override
                  public void onClick(View view) {
-                     changeActivityCreate();
+                     changeActivitySignUp();
                  }
             }
         );
