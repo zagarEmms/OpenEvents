@@ -1,4 +1,5 @@
 <resources>
+    <string name="app_company">MADE BY SOFIA</string>
     <string name="app_name">OpenEvents</string>
     <string name="title">OpenEvents</string>
     <string name="sign_up_title">Fill all the camps pls!</string>
@@ -7,4 +8,8 @@
     <string name="sign_up_name">Name</string>
     <string name="sign_up_last">LastName</string>
     <string name="sign_up_button">Sign Up</string>
+    <string name="log_in_button">Log in</string>
+    <string name="sign_up_text">Don\'t you have an account?</string>
+
+
 </resources>
