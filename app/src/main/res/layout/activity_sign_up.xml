@@ -27,6 +27,7 @@
         app:layout_constraintVertical_weight="150">
 
         <EditText
+            android:id="@+id/editName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
@@ -49,6 +50,7 @@
         app:layout_constraintVertical_weight="150">
 
         <EditText
+            android:id="@+id/editLast"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
@@ -70,6 +72,7 @@
         app:layout_constraintVertical_weight="150">
 
         <EditText
+            android:id="@+id/editEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
@@ -91,6 +94,7 @@
         app:layout_constraintVertical_weight="150">
 
         <EditText
+            android:id="@+id/editPass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"

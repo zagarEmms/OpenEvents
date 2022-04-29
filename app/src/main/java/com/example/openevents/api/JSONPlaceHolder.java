@@ -12,6 +12,6 @@ import retrofit2.http.POST;
 public interface JSONPlaceHolder {
 
     @POST("users")
-    Call<ArrayList<String>> signUp();
+    Call<ArrayList<String>> signUp(JsonObject signupInfo);
 
 }

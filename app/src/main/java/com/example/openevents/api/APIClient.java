@@ -1,4 +1,6 @@
 package com.example.openevents.api;
+import com.google.gson.JsonObject;
+
 import java.util.ArrayList;
 
 import retrofit2.Callback;
@@ -26,8 +28,8 @@ public class APIClient {
         this.service = this.retrofit.create(JSONPlaceHolder.class);
     }
 
-    public void signUp (Callback<ArrayList<String>> callback) {
-        this.service.signUp().enqueue(callback);
+    public void signUp (JsonObject signupInfo, Callback<ArrayList<String>> callback) {
+        this.service.signUp(signupInfo).enqueue(callback);
     }
 
 }

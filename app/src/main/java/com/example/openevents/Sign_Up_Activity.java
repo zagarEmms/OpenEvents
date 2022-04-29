@@ -9,8 +9,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.example.openevents.api.APIClient;
+import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
 
@@ -21,6 +23,10 @@ import retrofit2.Response;
 public class Sign_Up_Activity extends AppCompatActivity {
 
     private ArrayList<String> responseArrayList = new ArrayList<>();
+    private EditText name = (EditText) findViewById(R.id.editName);
+    private EditText last = (EditText) findViewById(R.id.editLast);
+    private EditText email = (EditText) findViewById(R.id.editEmail);
+    private EditText password = (EditText) findViewById(R.id.editPass);
 
     void changeActivity() {
         Intent intent = new Intent();
@@ -31,7 +37,9 @@ public class Sign_Up_Activity extends AppCompatActivity {
 
     public void setSignUp () {
 
-        APIClient.getInstance().signUp(new Callback<ArrayList<String>>() {
+        JsonObject signupInfo = new JsonObject();
+
+        APIClient.getInstance().signUp(signupInfo, new Callback<ArrayList<String>>() {
             @Override
             public void onResponse(Call<ArrayList<String>> call, Response<ArrayList<String>> response) {
                 Log.i("GET","GET WENT WELL!" + response.body());
@@ -46,6 +54,7 @@ public class Sign_Up_Activity extends AppCompatActivity {
     }
 
     void setButton () {
+
         Button signUpButton = findViewById(R.id.button_sign_up);
         signUpButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -55,6 +64,7 @@ public class Sign_Up_Activity extends AppCompatActivity {
                 }
             }
         );
+
     }
 
     @Override
