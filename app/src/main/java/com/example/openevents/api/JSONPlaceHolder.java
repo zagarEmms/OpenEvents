@@ -15,8 +15,8 @@ import retrofit2.http.POST;
 
 public interface JSONPlaceHolder {
 
-    @POST("users")
-    Call<User> signUp(@Body JSONObject signupInfo);
+    @POST("users/")
+    Call<User> signUp(@Body User user);
 
     @POST("users/login/")
     Call<Token> logIn(@Body JSONObject loginInfo);

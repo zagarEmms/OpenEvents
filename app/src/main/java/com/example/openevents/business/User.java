@@ -1,5 +1,7 @@
 package com.example.openevents.business;
 
+import android.text.Editable;
+
 import java.io.Serializable;
 
 public class User implements Serializable {
@@ -9,11 +11,19 @@ public class User implements Serializable {
     private String email;
     private String image;
 
-    public User(String name, String lastName, String email, String imageUrl) {
+    public User(String name, String lastName, String email, String image) {
         this.name = name;
         this.last_name = lastName;
         this.email = email;
-        this.image = imageUrl;
+        this.image = image;
+    }
+
+    public User(String name, String last_name, String email, String password, String image) {
+        this.name = name;
+        this.last_name = last_name;
+        this.email = email;
+        this.password = password;
+        this.image = image;
     }
 
     public String getName() {

@@ -34,8 +34,8 @@ public class APIClient {
         this.service = this.retrofit.create(JSONPlaceHolder.class);
     }
 
-    public void signUp (JSONObject signupInfo, Callback<User> callback) {
-        this.service.signUp(signupInfo).enqueue(callback);
+    public void signUp (User user, Callback<User> callback) {
+        this.service.signUp(user).enqueue(callback);
     }
 
     public void logIn (JSONObject loginInfo, Callback<Token> callback) {

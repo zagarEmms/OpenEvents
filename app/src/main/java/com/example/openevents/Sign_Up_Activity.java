@@ -46,25 +46,15 @@ public class Sign_Up_Activity extends AppCompatActivity {
         email = (EditText) findViewById(R.id.editEmail);
         password = (EditText) findViewById(R.id.editPass);
 
-        JSONObject signupInfo = new JSONObject();
-
-        try {
-            signupInfo.put("name", name.getText().toString());
-            signupInfo.put("last_name", last.getText().toString());
-            signupInfo.put("email", email.getText().toString());
-            signupInfo.put("password", password.getText().toString());
-            signupInfo.put("image", name.getText().toString());
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
         Log.i("INFO","name: " + name.getText().toString());
         Log.i("INFO","password: " + password.getText().toString());
 
-        APIClient.getInstance().signUp(signupInfo, new Callback<User>() {
+        User user = new User(name.getText().toString(), last.getText().toString(), email.getText().toString(), password.getText().toString(), name.getText().toString());
+
+        APIClient.getInstance().signUp(user, new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                Log.i("GET","GET WENT WELL!\n" + response.body());
+                Log.i("GET","GET WENT WELL!\n" + response.body().getEmail());
             }
 
             @Override
