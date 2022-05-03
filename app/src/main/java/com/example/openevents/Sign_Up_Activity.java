@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.openevents.api.APIClient;
+import com.example.openevents.business.User;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
@@ -26,7 +27,6 @@ import retrofit2.Response;
 
 public class Sign_Up_Activity extends AppCompatActivity {
 
-    private ArrayList<String> responseArrayList = new ArrayList<>();
     private EditText name;
     private EditText last;
     private EditText email;
@@ -61,15 +61,14 @@ public class Sign_Up_Activity extends AppCompatActivity {
         Log.i("INFO","name: " + name.getText().toString());
         Log.i("INFO","password: " + password.getText().toString());
 
-        APIClient.getInstance().signUp(signupInfo, new Callback<ArrayList<String>>() {
+        APIClient.getInstance().signUp(signupInfo, new Callback<User>() {
             @Override
-            public void onResponse(Call<ArrayList<String>> call, Response<ArrayList<String>> response) {
+            public void onResponse(Call<User> call, Response<User> response) {
                 Log.i("GET","GET WENT WELL!\n" + response.body());
-                responseArrayList = response.body();
             }
 
             @Override
-            public void onFailure(Call<ArrayList<String>> call, Throwable t) {
+            public void onFailure(Call<User> call, Throwable t) {
                 Log.i("GET","KO!");
             }
         });
