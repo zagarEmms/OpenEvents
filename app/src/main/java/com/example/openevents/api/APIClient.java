@@ -1,5 +1,8 @@
 package com.example.openevents.api;
 
+import com.example.openevents.business.Token;
+import com.example.openevents.business.User;
+
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -29,11 +32,11 @@ public class APIClient {
         this.service = this.retrofit.create(JSONPlaceHolder.class);
     }
 
-    public void signUp (JSONObject signupInfo, Callback<ArrayList<String>> callback) {
+    public void signUp (JSONObject signupInfo, Callback<User> callback) {
         this.service.signUp(signupInfo).enqueue(callback);
     }
 
-    public void logIn (JSONObject loginInfo, Callback<ArrayList<String>> callback) {
+    public void logIn (JSONObject loginInfo, Callback<Token> callback) {
         this.service.logIn(loginInfo).enqueue(callback);
     }
 

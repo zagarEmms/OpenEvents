@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.openevents.api.APIClient;
+import com.example.openevents.business.Token;
+import com.example.openevents.business.User;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -51,14 +53,14 @@ public class Log_In_Activity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        APIClient.getInstance().logIn(loginInfo, new Callback<ArrayList<String>>() {
+        APIClient.getInstance().logIn(loginInfo, new Callback<Token>() {
             @Override
-            public void onResponse(Call<ArrayList<String>> call, Response<ArrayList<String>> response) {
+            public void onResponse(Call<Token> call, Response<Token> response) {
                 Log.i("GET","LOG IN GET WENT WELL!" + response.body());
             }
 
             @Override
-            public void onFailure(Call<ArrayList<String>> call, Throwable t) {
+            public void onFailure(Call<Token> call, Throwable t) {
                 Log.i("GET","LOG IN KO!");
             }
         });
