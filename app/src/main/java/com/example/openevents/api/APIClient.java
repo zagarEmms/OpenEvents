@@ -1,5 +1,6 @@
 package com.example.openevents.api;
-import com.google.gson.JsonObject;
+
+import org.json.JSONObject;
 
 import org.json.JSONObject;
 
@@ -33,5 +34,10 @@ public class APIClient {
     public void signUp (JSONObject signupInfo, Callback<ArrayList<String>> callback) {
         this.service.signUp(signupInfo).enqueue(callback);
     }
+
+    public void logIn (JSONObject loginInfo, Callback<ArrayList<String>> callback) {
+        this.service.logIn(loginInfo).enqueue(callback);
+    }
+
 
 }

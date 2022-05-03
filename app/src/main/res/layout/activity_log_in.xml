@@ -28,6 +28,7 @@
         app:layout_constraintVertical_weight="150">
 
         <EditText
+            android:id="@+id/log_in_mail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="35dp"
@@ -53,6 +54,7 @@
         app:layout_constraintVertical_weight="150">
 
         <EditText
+            android:id="@+id/log_in_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="35dp"

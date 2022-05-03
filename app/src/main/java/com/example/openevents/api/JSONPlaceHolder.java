@@ -13,7 +13,10 @@ import retrofit2.http.POST;
 
 public interface JSONPlaceHolder {
 
-    @POST("users/")
+    @POST("users")
     Call<ArrayList<String>> signUp(@Body JSONObject signupInfo);
+
+    @POST("users/login")
+    Call<ArrayList<String>> logIn(@Body JSONObject loginInfo);
 
 }
