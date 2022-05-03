@@ -12,7 +12,11 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.openevents.api.APIClient;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -23,12 +27,12 @@ import retrofit2.Response;
 public class Sign_Up_Activity extends AppCompatActivity {
 
     private ArrayList<String> responseArrayList = new ArrayList<>();
-    private EditText name = (EditText) findViewById(R.id.editName);
-    private EditText last = (EditText) findViewById(R.id.editLast);
-    private EditText email = (EditText) findViewById(R.id.editEmail);
-    private EditText password = (EditText) findViewById(R.id.editPass);
+    private EditText name;
+    private EditText last;
+    private EditText email;
+    private EditText password;
 
-    void changeActivity() {
+    public void changeActivity() {
         Intent intent = new Intent();
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
@@ -37,13 +41,31 @@ public class Sign_Up_Activity extends AppCompatActivity {
 
     public void setSignUp () {
 
-        JsonObject signupInfo = new JsonObject();
+        name = (EditText) findViewById(R.id.editName);
+        last = (EditText) findViewById(R.id.editLast);
+        email = (EditText) findViewById(R.id.editEmail);
+        password = (EditText) findViewById(R.id.editPass);
+
+        JSONObject signupInfo = new JSONObject();
+
+        try {
+            signupInfo.put("name", name.getText().toString());
+            signupInfo.put("last_name", last.getText().toString());
+            signupInfo.put("email", email.getText().toString());
+            signupInfo.put("password", password.getText().toString());
+            signupInfo.put("image", name.getText().toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Log.i("INFO","name: " + name.getText().toString());
+        Log.i("INFO","password: " + password.getText().toString());
 
         APIClient.getInstance().signUp(signupInfo, new Callback<ArrayList<String>>() {
             @Override
             public void onResponse(Call<ArrayList<String>> call, Response<ArrayList<String>> response) {
-                Log.i("GET","GET WENT WELL!" + response.body());
-                responseArrayList =  response.body();
+                Log.i("GET","GET WENT WELL!\n" + response.body());
+                responseArrayList = response.body();
             }
 
             @Override
@@ -53,18 +75,17 @@ public class Sign_Up_Activity extends AppCompatActivity {
         });
     }
 
-    void setButton () {
+    public void setButton () {
 
         Button signUpButton = findViewById(R.id.button_sign_up);
         signUpButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     setSignUp();
-                    changeActivity();
+                    //changeActivity();
                 }
             }
         );
-
     }
 
     @Override
@@ -72,5 +93,6 @@ public class Sign_Up_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
         setButton();
+        Log.i("GET","BUTTON ASSIGNED!");
     }
 }
