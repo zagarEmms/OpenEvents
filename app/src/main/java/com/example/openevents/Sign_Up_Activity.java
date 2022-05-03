@@ -12,7 +12,11 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.openevents.api.APIClient;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -22,11 +26,10 @@ import retrofit2.Response;
 
 public class Sign_Up_Activity extends AppCompatActivity {
 
-    private ArrayList<String> responseArrayList = new ArrayList<>();
-    private EditText name = (EditText) findViewById(R.id.editName);
-    private EditText last = (EditText) findViewById(R.id.editLast);
-    private EditText email = (EditText) findViewById(R.id.editEmail);
-    private EditText password = (EditText) findViewById(R.id.editPass);
+    EditText name;
+    EditText last ;
+    EditText email;
+    EditText password;
 
     void changeActivity() {
         Intent intent = new Intent();
@@ -37,23 +40,34 @@ public class Sign_Up_Activity extends AppCompatActivity {
 
     public void setSignUp () {
 
-        JsonObject signupInfo = new JsonObject();
+        JSONObject signupInfo = new JSONObject();
+        try {
+            signupInfo.put("name", name.getText().toString());
+            signupInfo.put("last_name", last.getText().toString());
+            signupInfo.put("mail", email.getText().toString());
+            signupInfo.put("password", password.getText().toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
         APIClient.getInstance().signUp(signupInfo, new Callback<ArrayList<String>>() {
             @Override
             public void onResponse(Call<ArrayList<String>> call, Response<ArrayList<String>> response) {
-                Log.i("GET","GET WENT WELL!" + response.body());
-                responseArrayList =  response.body();
+                Log.i("GET","SIGN UP GET WENT WELL!" + response.body());
             }
 
             @Override
             public void onFailure(Call<ArrayList<String>> call, Throwable t) {
-                Log.i("GET","KO!");
+                Log.i("GET","SIGN UP KO!");
             }
         });
     }
 
     void setButton () {
+        name = (EditText) findViewById(R.id.editName);
+        last = (EditText) findViewById(R.id.editLast);
+        email = (EditText) findViewById(R.id.editEmail);
+        password = (EditText) findViewById(R.id.editPass);
 
         Button signUpButton = findViewById(R.id.button_sign_up);
         signUpButton.setOnClickListener(new View.OnClickListener() {
