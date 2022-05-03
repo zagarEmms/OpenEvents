@@ -1,5 +1,7 @@
 package com.example.openevents.api;
 
+import com.example.openevents.business.Token;
+import com.example.openevents.business.User;
 import com.google.gson.JsonObject;
 
 import org.json.JSONObject;
@@ -14,9 +16,9 @@ import retrofit2.http.POST;
 public interface JSONPlaceHolder {
 
     @POST("users")
-    Call<ArrayList<String>> signUp(@Body JSONObject signupInfo);
+    Call<User> signUp(@Body JSONObject signupInfo);
 
-    @POST("users/login")
-    Call<ArrayList<String>> logIn(@Body JSONObject loginInfo);
+    @POST("users/login/")
+    Call<Token> logIn(@Body JSONObject loginInfo);
 
 }
