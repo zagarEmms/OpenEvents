@@ -5,21 +5,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.openevents.api.APIClient;
 import com.example.openevents.business.Token;
 import com.example.openevents.business.User;
-import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -36,7 +30,7 @@ public class Log_In_Activity extends AppCompatActivity {
     }
 
     private void changeActivityHome() {
-        Intent intent = new Intent(Log_In_Activity.this, HomePage.class);
+        Intent intent = new Intent(Log_In_Activity.this, NavBar.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         finish();
@@ -49,11 +43,24 @@ public class Log_In_Activity extends AppCompatActivity {
             @Override
             public void onResponse(Call<Token> call, Response<Token> response) {
                 Log.i("GET","LOG IN GET WENT WELL!" + response.body());
+                if (response.body() == null) {
+                    Toast toast =
+                        Toast.makeText(getApplicationContext(), "Not user found", Toast.LENGTH_LONG);
+                        toast.setGravity(Gravity.TOP, 0,0);
+                        toast.show();
+
+                } else {
+                    changeActivityHome();
+                }
             }
 
             @Override
             public void onFailure(Call<Token> call, Throwable t) {
                 Log.i("GET","LOG IN KO!");
+                Toast toast =
+                        Toast.makeText(getApplicationContext(), "CONNECTION ERROR", Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.TOP, 0,0);
+                toast.show();
             }
         });
 
@@ -68,8 +75,6 @@ public class Log_In_Activity extends AppCompatActivity {
                  @Override
                  public void onClick(View view) {
                      setLogIn();
-                     changeActivityHome();
-
                  }
              }
         );
