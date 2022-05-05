@@ -19,6 +19,6 @@ public interface JSONPlaceHolder {
     Call<User> signUp(@Body User user);
 
     @POST("users/login/")
-    Call<Token> logIn(@Body JSONObject loginInfo);
+    Call<Token> logIn(@Body User user);
 
 }

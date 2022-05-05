@@ -5,15 +5,15 @@ import java.io.Serializable;
 public class Token implements Serializable {
     private String accessToken;
 
-    public Token(String token_id) {
-        this.accessToken = token_id;
+    public Token(String accessToken) {
+        this.accessToken = accessToken;
     }
 
-    public String getToken_id() {
+    public String getAccessToken() {
         return accessToken;
     }
 
-    public void setToken_id(String token_id) {
-        this.accessToken = token_id;
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken;
     }
 }

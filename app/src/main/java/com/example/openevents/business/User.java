@@ -11,9 +11,9 @@ public class User implements Serializable {
     private String email;
     private String image;
 
-    public User(String name, String lastName, String email, String image) {
+    public User(String name, String last_name, String email, String image) {
         this.name = name;
-        this.last_name = lastName;
+        this.last_name = last_name;
         this.email = email;
         this.image = image;
     }
@@ -24,6 +24,11 @@ public class User implements Serializable {
         this.email = email;
         this.password = password;
         this.image = image;
+    }
+
+    public User(String email, String password) {
+        this.email = email;
+        this.password = password;
     }
 
     public String getName() {

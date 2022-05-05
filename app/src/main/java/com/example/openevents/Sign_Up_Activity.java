@@ -41,11 +41,6 @@ public class Sign_Up_Activity extends AppCompatActivity {
 
     public void setSignUp () {
 
-        name = (EditText) findViewById(R.id.editName);
-        last = (EditText) findViewById(R.id.editLast);
-        email = (EditText) findViewById(R.id.editEmail);
-        password = (EditText) findViewById(R.id.editPass);
-
         Log.i("INFO","name: " + name.getText().toString());
         Log.i("INFO","password: " + password.getText().toString());
 
@@ -55,6 +50,7 @@ public class Sign_Up_Activity extends AppCompatActivity {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 Log.i("GET","GET WENT WELL!\n" + response.body().getEmail());
+                changeActivity();
             }
 
             @Override
@@ -66,12 +62,17 @@ public class Sign_Up_Activity extends AppCompatActivity {
 
     public void setButton () {
 
+        name = (EditText) findViewById(R.id.editName);
+        last = (EditText) findViewById(R.id.editLast);
+        email = (EditText) findViewById(R.id.editEmail);
+        password = (EditText) findViewById(R.id.editPass);
+
+
         Button signUpButton = findViewById(R.id.button_sign_up);
         signUpButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     setSignUp();
-                    //changeActivity();
                 }
             }
         );

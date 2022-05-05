@@ -38,8 +38,8 @@ public class APIClient {
         this.service.signUp(user).enqueue(callback);
     }
 
-    public void logIn (JSONObject loginInfo, Callback<Token> callback) {
-        this.service.logIn(loginInfo).enqueue(callback);
+    public void logIn (User user, Callback<Token> callback) {
+        this.service.logIn(user).enqueue(callback);
     }
 
 

@@ -43,17 +43,9 @@ public class Log_In_Activity extends AppCompatActivity {
     }
 
     private void setLogIn() {
+        User user = new User(email.getText().toString(), password.getText().toString());
 
-        JSONObject loginInfo = new JSONObject();
-
-        try {
-            loginInfo.put("email", email.getText().toString());
-            loginInfo.put("password", password.getText().toString());
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        APIClient.getInstance().logIn(loginInfo, new Callback<Token>() {
+        APIClient.getInstance().logIn(user, new Callback<Token>() {
             @Override
             public void onResponse(Call<Token> call, Response<Token> response) {
                 Log.i("GET","LOG IN GET WENT WELL!" + response.body());
