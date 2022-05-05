@@ -7,9 +7,11 @@ import com.example.openevents.api.APIClient;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.openevents.api.APIClient;
 import com.example.openevents.business.User;
@@ -31,6 +33,7 @@ public class Sign_Up_Activity extends AppCompatActivity {
     private EditText last;
     private EditText email;
     private EditText password;
+    private EditText password2;
 
     public void changeActivity() {
         Intent intent = new Intent();
@@ -46,18 +49,46 @@ public class Sign_Up_Activity extends AppCompatActivity {
 
         User user = new User(name.getText().toString(), last.getText().toString(), email.getText().toString(), password.getText().toString(), name.getText().toString());
 
-        APIClient.getInstance().signUp(user, new Callback<User>() {
-            @Override
-            public void onResponse(Call<User> call, Response<User> response) {
-                Log.i("GET","GET WENT WELL!\n" + response.body().getEmail());
-                changeActivity();
-            }
+        if (password.getText().toString().equals(password2.getText().toString())) {
 
-            @Override
-            public void onFailure(Call<User> call, Throwable t) {
-                Log.i("GET","KO!");
-            }
-        });
+            APIClient.getInstance().signUp(user, new Callback<User>() {
+                @Override
+                public void onResponse(Call<User> call, Response<User> response) {
+                    if (response.body() == null) {
+                        Toast toast1 =
+                                Toast.makeText(getApplicationContext(),
+                                        "INCORRECT SIGNUP!", Toast.LENGTH_SHORT);
+
+                        toast1.setGravity(Gravity.TOP, 0, 0);
+                        toast1.show();
+                    } else {
+                        Log.i("GET","GET WENT WELL!\n" + response.body().getEmail());
+                        changeActivity();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<User> call, Throwable t) {
+                    Log.i("GET","KO!");
+                    Toast toast2 =
+                            Toast.makeText(getApplicationContext(),
+                                    "CONNECTION ERROR!", Toast.LENGTH_SHORT);
+
+                    toast2.setGravity(Gravity.TOP, 0, 0);
+                    toast2.show();
+                }
+            });
+
+        } else {
+
+            Toast toast1 =
+                    Toast.makeText(getApplicationContext(),
+                            "INCORRECT PASSWORDS!", Toast.LENGTH_LONG);
+
+            toast1.setGravity(Gravity.TOP, 0, 0);
+            toast1.show();
+
+        }
     }
 
     public void setButton () {
@@ -66,7 +97,7 @@ public class Sign_Up_Activity extends AppCompatActivity {
         last = (EditText) findViewById(R.id.editLast);
         email = (EditText) findViewById(R.id.editEmail);
         password = (EditText) findViewById(R.id.editPass);
-
+        password2 = (EditText) findViewById(R.id.editPass2);
 
         Button signUpButton = findViewById(R.id.button_sign_up);
         signUpButton.setOnClickListener(new View.OnClickListener() {
