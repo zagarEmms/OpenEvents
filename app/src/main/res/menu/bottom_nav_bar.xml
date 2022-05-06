@@ -5,6 +5,10 @@
         android:title="Home"
         android:icon="@drawable/ic_home"/>
     <item
+        android:id="@+id/myevents"
+        android:title="My Events"
+        android:icon="@drawable/ic_my_events"/>
+    <item
         android:id="@+id/people"
         android:title="Search"
         android:icon="@drawable/ic_search"/>
