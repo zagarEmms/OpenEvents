@@ -1,5 +1,6 @@
 package com.example.openevents.api;
 
+import com.example.openevents.business.Event;
 import com.example.openevents.business.Token;
 import com.example.openevents.business.User;
 
@@ -40,6 +41,10 @@ public class APIClient {
 
     public void logIn (User user, Callback<Token> callback) {
         this.service.logIn(user).enqueue(callback);
+    }
+
+    public void createEvent (Token token, Event event, Callback<Event> callback) {
+        this.service.createEvent(token, event).enqueue(callback);
     }
 
 

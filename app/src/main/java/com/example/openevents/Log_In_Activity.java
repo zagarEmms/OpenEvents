@@ -25,7 +25,8 @@ public class Log_In_Activity extends AppCompatActivity {
     private EditText password;
 
     private void changeActivitySignUp () {
-        Intent intent = new Intent(this, Sign_Up_Activity.class);
+        //Intent intent = new Intent(this, Sign_Up_Activity.class);
+        Intent intent = new Intent(this, Create_Event_Activity.class);
         startActivity(intent);
     }
 
