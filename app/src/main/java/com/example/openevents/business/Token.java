@@ -3,6 +3,7 @@ package com.example.openevents.business;
 import java.io.Serializable;
 
 public class Token implements Serializable {
+
     private String accessToken;
 
     public Token(String accessToken) {

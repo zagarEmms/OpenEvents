@@ -3,16 +3,20 @@ package com.example.openevents;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.openevents.api.APIClient;
@@ -24,13 +28,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class Create_Event_Activity extends AppCompatActivity {
+public class Create_Event_Activity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private ImageView imageUpload;
     private Button createButton;
     private EditText title;
     private EditText description;
-    private EditText category;
+    private String category;
     private EditText startDate;
     private EditText startTime;
     private EditText endDate;
@@ -40,6 +44,8 @@ public class Create_Event_Activity extends AppCompatActivity {
     private int n_participators;
     private String eventStart_date;
     private String eventEnd_date;
+    private Spinner spinner;
+    private Token tokenObject;
 
     public void changeActivity () {
         Intent intent = new Intent();
@@ -48,18 +54,44 @@ public class Create_Event_Activity extends AppCompatActivity {
         finish();
     }
 
+    private void getToken() {
+
+        String token;
+
+        SharedPreferences prefs = this.getSharedPreferences("TOKEN", Context.MODE_PRIVATE);
+        token = prefs.getString("TOKEN","");
+        tokenObject = new Token(token);
+    }
+
     public void connectApi () {
 
-        /*Event event = new Event();
-        Token token = new Token();
+        title = (EditText) findViewById(R.id.createTitle);
+        description = (EditText) findViewById(R.id.createDescription);
+        startDate = (EditText) findViewById(R.id.createStartDate);
+        startTime = (EditText) findViewById(R.id.createStartTime);
+        endDate = (EditText) findViewById(R.id.createEndDate);
+        endTime =  (EditText) findViewById(R.id.createEndTime);
+        location = (EditText) findViewById(R.id.createLocation);
+        image = "null";
+        n_participators = 0;
 
-        APIClient.getInstance().createEvent(token, event, new Callback<Event>() {
+        Log.i("GET","TOKEN: " + tokenObject.getAccessToken());
+
+        eventStart_date = startDate.getText().toString() + ", " + startTime.getText().toString();
+        eventEnd_date = endDate.getText().toString() + ", " + endTime.getText().toString();
+
+        Log.i("GET","START SELECTED: " + eventStart_date);
+        Log.i("GET","END SELECTED: " + eventEnd_date);
+
+        Event event = new Event(title.getText().toString(), image, location.getText().toString(), description.getText().toString(), eventStart_date, eventEnd_date, n_participators, category);
+
+        APIClient.getInstance().createEvent(tokenObject, event, new Callback<Event>() {
             @Override
             public void onResponse(Call<Event> call, Response<Event> response) {
                 if (response.body() == null) {
                     Toast toast1 =
                             Toast.makeText(getApplicationContext(),
-                                    "INCORRECT SIGNUP!", Toast.LENGTH_SHORT);
+                                    "SOMETHING MISSING!", Toast.LENGTH_SHORT);
 
                     toast1.setGravity(Gravity.TOP, 0, 0);
                     toast1.show();
@@ -80,7 +112,6 @@ public class Create_Event_Activity extends AppCompatActivity {
                 toast2.show();
             }
         });
-*/
     }
 
     public void setImageUpload () {
@@ -105,14 +136,18 @@ public class Create_Event_Activity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
 
+                    getToken();
                     connectApi();
 
                 }
             }
         );
-
     }
 
+    public void setSpinner () {
+        spinner = (Spinner) findViewById(R.id.createCategory);
+        spinner.setOnItemSelectedListener(this);
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -124,9 +159,19 @@ public class Create_Event_Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_event);
+
         setImageUpload();
         setButton();
+        setSpinner();
+    }
 
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        category = adapterView.getSelectedItem().toString();
+    }
 
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+        category = null;
     }
 }

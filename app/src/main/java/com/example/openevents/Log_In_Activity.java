@@ -2,7 +2,9 @@ package com.example.openevents;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -15,6 +17,8 @@ import com.example.openevents.api.APIClient;
 import com.example.openevents.business.Token;
 import com.example.openevents.business.User;
 
+import org.json.JSONException;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -23,18 +27,31 @@ public class Log_In_Activity extends AppCompatActivity {
 
     private EditText email;
     private EditText password;
+    private String token;
 
     private void changeActivitySignUp () {
-        //Intent intent = new Intent(this, Sign_Up_Activity.class);
-        Intent intent = new Intent(this, Create_Event_Activity.class);
+        Intent intent = new Intent(this, Sign_Up_Activity.class);
         startActivity(intent);
     }
 
     private void changeActivityHome() {
-        Intent intent = new Intent(Log_In_Activity.this, NavBar.class);
+        Intent intent = new Intent(this, Create_Event_Activity.class);
+        //Intent intent = new Intent(Log_In_Activity.this, NavBar.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         finish();
+    }
+
+    public void saveToken () {
+
+        SharedPreferences prefs;
+        SharedPreferences.Editor edit;
+        prefs = this.getSharedPreferences("TOKEN", Context.MODE_PRIVATE);
+        edit = prefs.edit();
+        edit.putString("TOKEN", token);
+        Log.i("LOGIN", token);
+        edit.apply();
+
     }
 
     private void setLogIn() {
@@ -51,6 +68,8 @@ public class Log_In_Activity extends AppCompatActivity {
                         toast.show();
 
                 } else {
+                    token = response.body().getAccessToken();
+                    saveToken();
                     changeActivityHome();
                 }
             }

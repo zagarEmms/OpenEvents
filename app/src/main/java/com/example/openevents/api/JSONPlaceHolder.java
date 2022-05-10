@@ -23,7 +23,7 @@ public interface JSONPlaceHolder {
     @POST("users/login/")
     Call<Token> logIn(@Body User user);
 
-    @POST("users/login/")
-    Call<Event> createEvent(@Header("accessToken") Token token, @Body Event event);
+    @POST("events/")
+    Call<Event> createEvent(@Header("Bearer") Token token, @Body Event event);
 
 }
