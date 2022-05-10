@@ -14,7 +14,7 @@ import com.example.openevents.R;
 public class MyEventsFragment extends Fragment {
 
     public MyEventsFragment() {
-        // Required empty public constructor
+        //Required empty public constructor
     }
 
     @Override
