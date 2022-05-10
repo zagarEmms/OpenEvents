@@ -43,7 +43,7 @@ public class APIClient {
         this.service.logIn(user).enqueue(callback);
     }
 
-    public void createEvent (Token token, Event event, Callback<Event> callback) {
+    public void createEvent (String token, Event event, Callback<Event> callback) {
         this.service.createEvent(token, event).enqueue(callback);
     }
 

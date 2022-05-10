@@ -45,7 +45,7 @@ public class Create_Event_Activity extends AppCompatActivity implements AdapterV
     private String eventStart_date;
     private String eventEnd_date;
     private Spinner spinner;
-    private Token tokenObject;
+    private String token;
 
     public void changeActivity () {
         Intent intent = new Intent();
@@ -56,11 +56,9 @@ public class Create_Event_Activity extends AppCompatActivity implements AdapterV
 
     private void getToken() {
 
-        String token;
-
         SharedPreferences prefs = this.getSharedPreferences("TOKEN", Context.MODE_PRIVATE);
-        token = prefs.getString("TOKEN","");
-        tokenObject = new Token(token);
+        token = "Bearer " + prefs.getString("TOKEN","");
+        
     }
 
     public void connectApi () {
@@ -68,14 +66,14 @@ public class Create_Event_Activity extends AppCompatActivity implements AdapterV
         title = (EditText) findViewById(R.id.createTitle);
         description = (EditText) findViewById(R.id.createDescription);
         startDate = (EditText) findViewById(R.id.createStartDate);
-        startTime = (EditText) findViewById(R.id.createStartTime);
+        startTime = (EditText) findViewById(R.id.createStartTime);                                                  
         endDate = (EditText) findViewById(R.id.createEndDate);
         endTime =  (EditText) findViewById(R.id.createEndTime);
         location = (EditText) findViewById(R.id.createLocation);
-        image = "null";
+        image = "imageTest";
         n_participators = 0;
 
-        Log.i("GET","TOKEN: " + tokenObject.getAccessToken());
+        Log.i("GET","TOKEN: " + token);
 
         eventStart_date = startDate.getText().toString() + ", " + startTime.getText().toString();
         eventEnd_date = endDate.getText().toString() + ", " + endTime.getText().toString();
@@ -85,9 +83,10 @@ public class Create_Event_Activity extends AppCompatActivity implements AdapterV
 
         Event event = new Event(title.getText().toString(), image, location.getText().toString(), description.getText().toString(), eventStart_date, eventEnd_date, n_participators, category);
 
-        APIClient.getInstance().createEvent(tokenObject, event, new Callback<Event>() {
+        APIClient.getInstance().createEvent(token, event, new Callback<Event>() {
             @Override
             public void onResponse(Call<Event> call, Response<Event> response) {
+
                 if (response.body() == null) {
                     Toast toast1 =
                             Toast.makeText(getApplicationContext(),
@@ -97,7 +96,7 @@ public class Create_Event_Activity extends AppCompatActivity implements AdapterV
                     toast1.show();
                 } else {
                     Log.i("GET","GET WENT WELL!\n" + response.body().getName());
-                    changeActivity();
+                    //changeActivity();
                 }
             }
 

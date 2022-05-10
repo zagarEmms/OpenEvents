@@ -13,6 +13,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.Headers;
 import retrofit2.http.POST;
 
 public interface JSONPlaceHolder {
@@ -24,6 +25,6 @@ public interface JSONPlaceHolder {
     Call<Token> logIn(@Body User user);
 
     @POST("events/")
-    Call<Event> createEvent(@Header("Bearer") Token token, @Body Event event);
+    Call<Event> createEvent(@Header("Authorization") String token, @Body Event event);
 
 }
