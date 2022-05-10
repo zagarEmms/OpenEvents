@@ -42,4 +42,16 @@ public class Event implements Serializable {
     public String getName() {
         return name;
     }
+
+    public String getImage() {
+        return image;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public String getEventStart_date() {
+        return eventStart_date;
+    }
 }

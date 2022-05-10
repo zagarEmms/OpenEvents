@@ -40,19 +40,19 @@ public class NavBar extends AppCompatActivity implements NavigationBarView.OnIte
         int id = item.getItemId();
 
         if (id == R.id.home) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.container, exploreEventsFragment).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, exploreEventsFragment).commit();
             return true;
         } else if (id == R.id.myevents) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.container, myEventsFragment).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, myEventsFragment).commit();
             return true;
         } else if (id == R.id.search) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.container, searchFragment).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, searchFragment).commit();
             return true;
         } else if (id == R.id.people) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.container, peopleFragment).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, peopleFragment).commit();
             return true;
         } else if (id == R.id.person) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.container, personFragment).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, personFragment).commit();
             return true;
         }
 

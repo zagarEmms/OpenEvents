@@ -26,4 +26,6 @@ public interface JSONPlaceHolder {
     @POST("events/")
     Call<Event> createEvent(@Header("Bearer") Token token, @Body Event event);
 
+    @GET("events/")
+    Call<ArrayList<Event>> showEvents();
 }

@@ -47,5 +47,8 @@ public class APIClient {
         this.service.createEvent(token, event).enqueue(callback);
     }
 
+    public void showEvents(Callback<ArrayList<Event>> callback) {
+        this.service.showEvents().enqueue(callback);
+    }
 
 }
