@@ -2,6 +2,9 @@ package com.example.openevents;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -17,8 +20,7 @@ public class NavBar extends AppCompatActivity implements NavigationBarView.OnIte
 
     BottomNavigationView bottomNavView;
 
-    ExploreEventsFragment exploreEventsFragment = new ExploreEventsFragment();
-    MyEventsFragment myEventsFragment = new MyEventsFragment();
+    private static Bundle bundle = new Bundle();
     SearchFragment searchFragment = new SearchFragment();
     PeopleFragment peopleFragment = new PeopleFragment();
     PersonFragment personFragment = new PersonFragment();
@@ -32,6 +34,8 @@ public class NavBar extends AppCompatActivity implements NavigationBarView.OnIte
 
         bottomNavView.setOnItemSelectedListener(this);
         bottomNavView.setSelectedItemId(R.id.home);
+
+        bundle.putString("TOKEN", getToken());
     }
 
 
@@ -40,9 +44,13 @@ public class NavBar extends AppCompatActivity implements NavigationBarView.OnIte
         int id = item.getItemId();
 
         if (id == R.id.home) {
+            ExploreEventsFragment exploreEventsFragment = new ExploreEventsFragment();
+            exploreEventsFragment.setArguments(bundle);
             getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, exploreEventsFragment).commit();
             return true;
         } else if (id == R.id.myevents) {
+            MyEventsFragment myEventsFragment = new MyEventsFragment();
+            myEventsFragment.setArguments(bundle);
             getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, myEventsFragment).commit();
             return true;
         } else if (id == R.id.search) {
@@ -57,5 +65,12 @@ public class NavBar extends AppCompatActivity implements NavigationBarView.OnIte
         }
 
         return false;
+    }
+
+    private String getToken() {
+
+        SharedPreferences prefs = this.getSharedPreferences("TOKEN", Context.MODE_PRIVATE);
+        return "Bearer " + prefs.getString("TOKEN","");
+
     }
 }

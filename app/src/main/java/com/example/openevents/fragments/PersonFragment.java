@@ -13,6 +13,8 @@ import com.example.openevents.R;
 
 public class PersonFragment extends Fragment {
 
+    //private TextView tx (which is on the fragment and at first is null)
+
     public PersonFragment() {
         // Required empty public constructor
     }
@@ -22,5 +24,13 @@ public class PersonFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_person, container, false);
+
+        //return v
+        //configView(v) -> all the necessary findbyId
+        //setupInititalView() -> sets Response tmp object with info __> call function //drawInfo() -> with all the necessary setText
+        //fetchUser(Response response) -> api petition __> call function drawInfo() again with the new info
+
+
+        //setName and all the information from the callback response
     }
 }
