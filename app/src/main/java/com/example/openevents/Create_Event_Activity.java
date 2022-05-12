@@ -45,7 +45,6 @@ public class Create_Event_Activity extends AppCompatActivity implements AdapterV
     private String eventStart_date;
     private String eventEnd_date;
     private Spinner spinner;
-    private String token;
 
     public void changeActivity () {
         Intent intent = new Intent();
@@ -54,10 +53,10 @@ public class Create_Event_Activity extends AppCompatActivity implements AdapterV
         finish();
     }
 
-    private void getToken() {
+    private String getToken() {
 
         SharedPreferences prefs = this.getSharedPreferences("TOKEN", Context.MODE_PRIVATE);
-        token = "Bearer " + prefs.getString("TOKEN","");
+        return "Bearer " + prefs.getString("TOKEN","");
         
     }
 
@@ -73,8 +72,6 @@ public class Create_Event_Activity extends AppCompatActivity implements AdapterV
         image = "imageTest";
         n_participators = 0;
 
-        Log.i("GET","TOKEN: " + token);
-
         eventStart_date = startDate.getText().toString() + ", " + startTime.getText().toString();
         eventEnd_date = endDate.getText().toString() + ", " + endTime.getText().toString();
 
@@ -83,7 +80,7 @@ public class Create_Event_Activity extends AppCompatActivity implements AdapterV
 
         Event event = new Event(title.getText().toString(), image, location.getText().toString(), description.getText().toString(), eventStart_date, eventEnd_date, n_participators, category);
 
-        APIClient.getInstance().createEvent(token, event, new Callback<Event>() {
+        APIClient.getInstance().createEvent(getToken(), event, new Callback<Event>() {
             @Override
             public void onResponse(Call<Event> call, Response<Event> response) {
 
@@ -120,8 +117,13 @@ public class Create_Event_Activity extends AppCompatActivity implements AdapterV
                @Override
                public void onClick(View view) {
 
-                   Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                   //startActivityForResult();
+                   //Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                   Toast toast1 =
+                           Toast.makeText(getApplicationContext(),
+                                   "IMAGE DISABLED", Toast.LENGTH_SHORT);
+
+                   toast1.setGravity(Gravity.TOP, 0, 0);
+                   toast1.show();
 
                }
            }
@@ -146,12 +148,6 @@ public class Create_Event_Activity extends AppCompatActivity implements AdapterV
     public void setSpinner () {
         spinner = (Spinner) findViewById(R.id.createCategory);
         spinner.setOnItemSelectedListener(this);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
     }
 
     @Override
