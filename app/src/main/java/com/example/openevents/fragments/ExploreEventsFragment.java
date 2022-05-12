@@ -91,6 +91,8 @@ public class ExploreEventsFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
+        token = getArguments().getString("TOKEN");
+
         fillArrayList();
 
         adapter = new ListAdapter(getContext(), eventArrayList);

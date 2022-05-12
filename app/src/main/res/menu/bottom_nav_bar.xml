@@ -9,11 +9,11 @@
         android:title="My Events"
         android:icon="@drawable/ic_my_events"/>
     <item
-        android:id="@+id/people"
+        android:id="@+id/search"
         android:title="Search"
         android:icon="@drawable/ic_search"/>
     <item
-        android:id="@+id/search"
+        android:id="@+id/people"
         android:title="People"
         android:icon="@drawable/ic_people"/>
     <item

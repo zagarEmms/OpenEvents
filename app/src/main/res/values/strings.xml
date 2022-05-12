@@ -21,6 +21,7 @@
     <string name="create_end_time">End time</string>
     <string name="create_image_upload">Upload cover image</string>
     <string name="explore_events_title">Explore events ⚡</string>
+    <string name="title_people">People 🥸</string>
 
 
     <string-array name="dropCategories">

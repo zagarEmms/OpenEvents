@@ -23,7 +23,7 @@
             android:name=".Sign_Up_Activity"
             android:exported="true" />
         <activity
-            android:name=".NavBar"
+            android:name=".Nav_Bar_Activity"
             android:exported="true" />
         <activity
             android:name=".MainActivity"

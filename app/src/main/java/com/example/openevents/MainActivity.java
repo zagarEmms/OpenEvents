@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
                 } else {
 
-                    Intent intent = new Intent(MainActivity.this, NavBar.class);
+                    Intent intent = new Intent(MainActivity.this, Nav_Bar_Activity.class);
                     MainActivity.this.startActivity(intent);
                     MainActivity.this.finish();
 

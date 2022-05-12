@@ -16,19 +16,16 @@ import com.example.openevents.fragments.SearchFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
-public class NavBar extends AppCompatActivity implements NavigationBarView.OnItemSelectedListener {
+public class Nav_Bar_Activity extends AppCompatActivity implements NavigationBarView.OnItemSelectedListener {
 
     BottomNavigationView bottomNavView;
 
     private static Bundle bundle = new Bundle();
-    SearchFragment searchFragment = new SearchFragment();
-    PeopleFragment peopleFragment = new PeopleFragment();
-    PersonFragment personFragment = new PersonFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.nav_bar);
+        setContentView(R.layout.activity_nav_bar);
 
         bottomNavView = findViewById(R.id.container);
 
@@ -54,12 +51,18 @@ public class NavBar extends AppCompatActivity implements NavigationBarView.OnIte
             getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, myEventsFragment).commit();
             return true;
         } else if (id == R.id.search) {
+            SearchFragment searchFragment = new SearchFragment();
+            searchFragment.setArguments(bundle);
             getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, searchFragment).commit();
             return true;
         } else if (id == R.id.people) {
+            PeopleFragment peopleFragment = new PeopleFragment();
+            peopleFragment.setArguments(bundle);
             getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, peopleFragment).commit();
             return true;
         } else if (id == R.id.person) {
+            PersonFragment personFragment = new PersonFragment();
+            personFragment.setArguments(bundle);
             getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, personFragment).commit();
             return true;
         }

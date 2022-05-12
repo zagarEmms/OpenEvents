@@ -29,4 +29,8 @@ public interface JSONPlaceHolder {
 
     @GET("events/")
     Call<ArrayList<Event>> showEvents (@Header("Authorization") String token);
+
+    @GET("users/")
+    Call<ArrayList<User>> showPeople (@Header("Authorization") String token);
+
 }
