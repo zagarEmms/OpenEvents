@@ -21,7 +21,10 @@
     <string name="create_end_time">End time</string>
     <string name="create_image_upload">Upload cover image</string>
     <string name="explore_events_title">Explore events ⚡</string>
-    <string name="title_people">People 🥸</string>
+    <string name="title_people">People 🤗</string>
+    <string name="title_search">Search Friends 🧐</string>
+    <string name="search_text">Search for name, last name or email</string>
+    <string name="search_results">0 matching result found:</string>
 
 
     <string-array name="dropCategories">

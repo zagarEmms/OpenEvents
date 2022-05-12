@@ -15,6 +15,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 public interface JSONPlaceHolder {
 
@@ -32,5 +33,8 @@ public interface JSONPlaceHolder {
 
     @GET("users/")
     Call<ArrayList<User>> showPeople (@Header("Authorization") String token);
+
+    @GET("users/search/")
+    Call<ArrayList<User>> showPeopleSearch (@Header("Authorization") String token, @Query("s") String query);
 
 }
