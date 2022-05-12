@@ -40,9 +40,9 @@ public class EventInfoFragment extends Fragment {
     }
 
     public void getInfoAPI() {
-        APIClient.getInstance().showEventInfo(token, id, new Callback<Event>() {
+        APIClient.getInstance().showEventInfo(token, id, new Callback<ArrayList<Event>>() {
             @Override
-            public void onResponse(Call<Event> call, Response<Event> response) {
+            public void onResponse(Call<ArrayList<Event>> call, Response<ArrayList<Event>> response) {
 
                 if (response.body() == null) {
                     Toast toast =
@@ -57,7 +57,7 @@ public class EventInfoFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<Event> call, Throwable t) {
+            public void onFailure(Call<ArrayList<Event>> call, Throwable t) {
                 Log.i("GET","EVENT INFO KO!");
                 Toast toast =
                         Toast.makeText(getContext(), "CONNECTION ERROR", Toast.LENGTH_LONG);
@@ -67,14 +67,14 @@ public class EventInfoFragment extends Fragment {
         });
     }
 
-    private void fillAPIInfo(Response<Event> response) {
-        name.setText(response.body().getName());
-        description.setText(response.body().getDescription());
-        location.setText(response.body().getLocation());
-        startDate.setText(response.body().getEventStart_date());
-        endDate.setText(response.body().getEventEnd_date());
-        participants.setText(response.body().getN_participators());
-        type.setText(response.body().getType());
+    private void fillAPIInfo(Response<ArrayList<Event>> response) {
+        name.setText(response.body().get(0).getName());
+        description.setText(response.body().get(0).getDescription());
+        startDate.setText(response.body().get(0).getEventStart_date());
+        endDate.setText(response.body().get(0).getEventEnd_date());
+        participants.setText(String.valueOf(response.body().get(0).getN_participators()));
+        location.setText(response.body().get(0).getLocation());
+        type.setText(response.body().get(0).getType());
     }
 
     @Override
@@ -99,10 +99,10 @@ public class EventInfoFragment extends Fragment {
     private void configView(View v) {
         name = v.findViewById(R.id.itemName);
         description = v.findViewById(R.id.description);
-        location = v.findViewById(R.id.location);
         startDate = v.findViewById(R.id.start_date);
         endDate = v.findViewById(R.id.end_date);
         participants = v.findViewById(R.id.participants);
+        location = v.findViewById(R.id.location);
         type = v.findViewById(R.id.tag);
     }
 

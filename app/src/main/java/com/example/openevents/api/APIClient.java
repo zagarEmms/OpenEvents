@@ -59,4 +59,8 @@ public class APIClient {
         this.service.showPeopleSearch(token, query).enqueue(callback);
     }
 
+    public void showEventInfo(String token, int id, Callback<ArrayList<Event>> callback) {
+        this.service.showEventInfo(token, id).enqueue(callback);
+    }
+
 }

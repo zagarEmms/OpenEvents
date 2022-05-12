@@ -33,7 +33,7 @@ public interface JSONPlaceHolder {
     Call<ArrayList<Event>> showEvents (@Header("Authorization") String token);
 
     @GET("events/{id}")
-    Call<Event> showEventInfo(@Header("Authorization") String token, @Path("id") int id);
+    Call<ArrayList<Event>> showEventInfo(@Header("Authorization") String token, @Path("id") int id);
 
     @GET("users/")
     Call<ArrayList<User>> showPeople (@Header("Authorization") String token);
