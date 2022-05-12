@@ -50,7 +50,6 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ListAdapter.ViewHolder holder, int position) {
-        //holder.eventImage.setImageDrawable(ImageFromUrl(eventsArrayList.get(position).getImage()));
         holder.eventName.setText(eventsArrayList.get(position).getName());
         holder.startDate.setText(eventsArrayList.get(position).getEventStart_date());
         holder.location.setText(eventsArrayList.get(position).getLocation());
@@ -63,7 +62,6 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-        //ImageView eventImage;
         private TextView eventName;
         private TextView startDate;
         private TextView location;
@@ -74,34 +72,25 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         public ViewHolder(@NonNull View itemView, ListAdapter.MyOnClickListener listener) {
             super(itemView);
 
-            //eventImage = itemView.findViewById(R.id.itemImg);
+            this.listener = listener;
+            itemView.setOnClickListener(this);
+
             eventName = itemView.findViewById(R.id.itemName);
             startDate = itemView.findViewById(R.id.start_date);
             location = itemView.findViewById(R.id.location);
 
             linearLayout = itemView.findViewById(R.id.layout_id);
 
-            this.listener = listener;
-            itemView.setOnClickListener(this);
 
         }
 
         @Override
         public void onClick(View view) {
             if (listener != null) {
-                listener.myOnClick(view, getAdapterPosition());
+                listener.myOnClick(view, getBindingAdapterPosition());
             }
         }
 
     }
 
-    public Drawable ImageFromUrl(String url) {
-        try {
-            InputStream is = (InputStream) new URL(url).getContent();
-            Drawable d = Drawable.createFromStream(is, "src name");
-            return d;
-        } catch (Exception e) {
-            return null;
-        }
-    }
 }

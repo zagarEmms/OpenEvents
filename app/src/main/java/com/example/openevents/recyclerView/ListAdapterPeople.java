@@ -24,6 +24,10 @@ public class ListAdapterPeople extends RecyclerView.Adapter<ListAdapterPeople.Vi
         void myOnClick(View view, int position);
     }
 
+    public void setListener(MyOnClickListener listener) {
+        this.listener = (ListAdapter.MyOnClickListener) listener;
+    }
+
     public ListAdapterPeople(Context context, ArrayList<User> peopleArrayList) {
         this.context = context;
         this.peopleArrayList = peopleArrayList;
@@ -72,7 +76,7 @@ public class ListAdapterPeople extends RecyclerView.Adapter<ListAdapterPeople.Vi
         @Override
         public void onClick(View view) {
             if (listener != null) {
-                listener.myOnClick(view, getAdapterPosition());
+                listener.myOnClick(view, getBindingAdapterPosition());
             }
         }
     }

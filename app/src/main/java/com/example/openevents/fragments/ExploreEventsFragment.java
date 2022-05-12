@@ -3,6 +3,8 @@ package com.example.openevents.fragments;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -25,12 +27,14 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class ExploreEventsFragment extends Fragment {
+public class ExploreEventsFragment extends Fragment implements ListAdapter.MyOnClickListener {
 
+    private static final Bundle bundle = new Bundle();
     private RecyclerView recyclerView;
-    private ArrayList<Event> eventArrayList = new ArrayList<>();
     private String token;
     private ListAdapter adapter;
+
+    private ArrayList<Event> eventArrayList = new ArrayList<>();
 
     public ExploreEventsFragment() {
         // Required empty public constructor
@@ -69,16 +73,16 @@ public class ExploreEventsFragment extends Fragment {
         });
     }
 
-    public void fillArrayList() {
-        eventArrayList.add(new Event("Drawing Meet Up of the month: January", "https://i.imgur.com/Ou3LVpb.jpg", "Barcelona",
-                "Come paint with a group of artists. Bring your own materials and canvas.","2022-01-01T12:00:00.000Z", "2022-01-12T17:30:00.000Z",
-                10, "Education"));
-        eventArrayList.add(new Event("Drawing 101: Portraits", "https://i.imgur.com/JprpLyc.jpg", "Tarragona",
-                "Learn the basics of portrait drawing with a professional artist with +10 years of experience.","2022-01-01T12:00:00.000Z", "2022-01-12T17:30:00.000Z",
-                10, "Art"));
-        eventArrayList.add(new Event("Cooking a Tortilla", "https://i.imgur.com/Ou3LVpb.jpg", "Soria",
-                "We will discover the power of torilla de patatas","2022-01-01T12:00:00.000Z", "2022-01-12T17:30:00.000Z",
-                10, "Cooking"));
+    public void fillTmpArrayList() {
+        eventArrayList.add(new Event("---", "---", "---",
+                "---","---", "---",
+                10, "---"));
+        eventArrayList.add(new Event("---", "---", "---",
+                "---","---", "---",
+                10, "---"));
+        eventArrayList.add(new Event("---", "---", "-",
+                "---","---", "---",
+                10, "---"));
     }
 
     @Override
@@ -87,19 +91,41 @@ public class ExploreEventsFragment extends Fragment {
 
         View v = inflater.inflate(R.layout.fragment_explore_events, container, false);
 
+        token = getArguments().getString("TOKEN");
+
         recyclerView = v.findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         token = getArguments().getString("TOKEN");
 
-        fillArrayList();
+        fillTmpArrayList();
 
         adapter = new ListAdapter(getContext(), eventArrayList);
         recyclerView.setAdapter(adapter);
+        adapter.setListener(this);
 
         getEventsListAPI();
 
         return v;
+    }
+
+    @Override
+    public void myOnClick(View view, int position) {
+        int id = eventArrayList.get(position).getId();
+        ArrayList<String> eventInfo = new ArrayList<>();
+        eventInfo.add(token);
+        eventInfo.add(String.valueOf(id));
+
+        bundle.putStringArrayList("EVENT_INFO",eventInfo);
+
+        EventInfoFragment eventFragment = new EventInfoFragment();
+        eventFragment.setArguments(bundle);
+
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.flFragment, eventFragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
     }
 }

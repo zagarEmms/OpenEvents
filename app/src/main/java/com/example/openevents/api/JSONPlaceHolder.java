@@ -15,6 +15,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface JSONPlaceHolder {
@@ -30,6 +31,9 @@ public interface JSONPlaceHolder {
 
     @GET("events/")
     Call<ArrayList<Event>> showEvents (@Header("Authorization") String token);
+
+    @GET("events/{id}")
+    Call<Event> showEventInfo(@Header("Authorization") String token, @Path("id") int id);
 
     @GET("users/")
     Call<ArrayList<User>> showPeople (@Header("Authorization") String token);
