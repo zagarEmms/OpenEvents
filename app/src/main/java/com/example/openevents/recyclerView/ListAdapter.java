@@ -45,14 +45,15 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     @Override
     public ListAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.event_item, parent, false);
-        ViewHolder viewHolder = new ViewHolder(view, listener);
-        return viewHolder;
+        return new ViewHolder(view, listener);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ListAdapter.ViewHolder holder, int position) {
         //holder.eventImage.setImageDrawable(ImageFromUrl(eventsArrayList.get(position).getImage()));
         holder.eventName.setText(eventsArrayList.get(position).getName());
+        holder.startDate.setText(eventsArrayList.get(position).getEventStart_date());
+        holder.location.setText(eventsArrayList.get(position).getLocation());
     }
 
     @Override
@@ -64,6 +65,9 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
         //ImageView eventImage;
         private TextView eventName;
+        private TextView startDate;
+        private TextView location;
+
         private LinearLayout linearLayout;
         private ListAdapter.MyOnClickListener listener;
 
@@ -72,6 +76,9 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
             //eventImage = itemView.findViewById(R.id.itemImg);
             eventName = itemView.findViewById(R.id.itemName);
+            startDate = itemView.findViewById(R.id.start_date);
+            location = itemView.findViewById(R.id.location);
+
             linearLayout = itemView.findViewById(R.id.layout_id);
 
             this.listener = listener;

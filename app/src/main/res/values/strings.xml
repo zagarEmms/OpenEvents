@@ -20,6 +20,8 @@
     <string name="create_start_time">Start time</string>
     <string name="create_end_time">End time</string>
     <string name="create_image_upload">Upload cover image</string>
+    <string name="explore_events_title">Explore events ⚡</string>
+
 
     <string-array name="dropCategories">
         <item>Categories</item>
