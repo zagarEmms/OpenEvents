@@ -25,9 +25,14 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
     private Context context;
     private ArrayList<Event> eventsArrayList;
+    private MyOnClickListener listener;
 
     public interface MyOnClickListener {
         void myOnClick(View view, int position);
+    }
+
+    public void setListener(MyOnClickListener listener) {
+        this.listener = listener;
     }
 
     public ListAdapter(Context context, ArrayList<Event> eventsArrayList) {
@@ -40,13 +45,13 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     @Override
     public ListAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.event_item, parent, false);
-        ViewHolder viewHolder = new ViewHolder(view);
+        ViewHolder viewHolder = new ViewHolder(view, listener);
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ListAdapter.ViewHolder holder, int position) {
-        holder.eventImage.setImageDrawable(ImageFromUrl(eventsArrayList.get(position).getImage()));
+        //holder.eventImage.setImageDrawable(ImageFromUrl(eventsArrayList.get(position).getImage()));
         holder.eventName.setText(eventsArrayList.get(position).getName());
     }
 
@@ -55,20 +60,32 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         return eventsArrayList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-        ImageView eventImage;
-        TextView eventName;
-        LinearLayout linearLayout;
+        //ImageView eventImage;
+        private TextView eventName;
+        private LinearLayout linearLayout;
+        private ListAdapter.MyOnClickListener listener;
 
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull View itemView, ListAdapter.MyOnClickListener listener) {
             super(itemView);
 
-            eventImage = itemView.findViewById(R.id.itemImg);
+            //eventImage = itemView.findViewById(R.id.itemImg);
             eventName = itemView.findViewById(R.id.itemName);
             linearLayout = itemView.findViewById(R.id.layout_id);
 
+            this.listener = listener;
+            itemView.setOnClickListener(this);
+
         }
+
+        @Override
+        public void onClick(View view) {
+            if (listener != null) {
+                listener.myOnClick(view, getAdapterPosition());
+            }
+        }
+
     }
 
     public Drawable ImageFromUrl(String url) {

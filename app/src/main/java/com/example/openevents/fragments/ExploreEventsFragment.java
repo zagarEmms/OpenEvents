@@ -1,5 +1,7 @@
 package com.example.openevents.fragments;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -29,27 +31,34 @@ import retrofit2.Response;
 
 public class ExploreEventsFragment extends Fragment {
 
-    RecyclerView recyclerView;
-    ArrayList<Event> eventArrayList = new ArrayList<>();
+    private RecyclerView recyclerView;
+    private ArrayList<Event> eventArrayList = new ArrayList<>();
+    private String token;
+
+    //new Adapter en onCreateView
 
     public ExploreEventsFragment() {
         // Required empty public constructor
     }
 
     public void getEventsList() {
-
-        APIClient.getInstance().showEvents(new Callback<ArrayList<Event>>() {
+        APIClient.getInstance().showEvents(token, new Callback<ArrayList<Event>>() {
             @Override
             public void onResponse(Call<ArrayList<Event>> call, Response<ArrayList<Event>> response) {
-                Log.i("GET","LOG IN GET WENT WELL!" + response.body());
                 if (response.body() == null) {
                     Toast toast =
                             Toast.makeText(getContext(), "Not events found", Toast.LENGTH_LONG);
                     toast.setGravity(Gravity.TOP, 0,0);
                     toast.show();
 
+                    //eventsarray.clear(per netejar el array predefinit hardcoded)
                 } else {
-                    eventArrayList = response.body();
+                    Log.i("GET","EVENTS WENT WELL!" + response.body());
+                    eventArrayList.addAll(response.body());
+                    Log.i("GET", eventArrayList.get(2).getName());
+
+                    //eventsarray:addAll (amb els del response)
+                    //notifyDataChange en adapter
                 }
             }
 
@@ -85,14 +94,14 @@ public class ExploreEventsFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        fillArrayList();
-        //getEventsList();
+        //fillArrayList();
+        getEventsList();
 
         for (int i = 0; i < eventArrayList.size(); i++) {
             Log.i("EVENT", eventArrayList.get(i).getName());
         }
 
-        recyclerView.setAdapter(new ListAdapter(getContext(), eventArrayList));
+        recyclerView.setAdapter(new ListAdapter(getContext(), eventArrayList)); //igualar a Adapter del atribut del Fragment
 
         return v;
     }
