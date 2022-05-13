@@ -25,6 +25,8 @@
     <string name="title_search">Search Friends 🧐</string>
     <string name="search_text">Search for name, last name or email</string>
     <string name="search_results">0 matching result found:</string>
+    <string name="title_my_events">My Events 🥳</string>
+
 
 
     <string-array name="dropCategories">
