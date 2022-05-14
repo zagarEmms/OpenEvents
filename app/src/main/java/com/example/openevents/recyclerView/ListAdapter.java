@@ -27,10 +27,6 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     private ArrayList<Event> eventsArrayList;
     private MyOnClickListener listener;
 
-    public interface MyOnClickListener {
-        void myOnClick(View view, int position);
-    }
-
     public void setListener(MyOnClickListener listener) {
         this.listener = listener;
     }
@@ -67,9 +63,9 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         private TextView location;
 
         private LinearLayout linearLayout;
-        private ListAdapter.MyOnClickListener listener;
+        private MyOnClickListener listener;
 
-        public ViewHolder(@NonNull View itemView, ListAdapter.MyOnClickListener listener) {
+        public ViewHolder(@NonNull View itemView, MyOnClickListener listener) {
             super(itemView);
 
             this.listener = listener;

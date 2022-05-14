@@ -18,14 +18,10 @@ public class ListAdapterPeople extends RecyclerView.Adapter<ListAdapterPeople.Vi
 
     private Context context;
     private ArrayList<User> peopleArrayList;
-    private ListAdapter.MyOnClickListener listener;
+    private MyOnClickListener listenerPeople;
 
-    public interface MyOnClickListener {
-        void myOnClick(View view, int position);
-    }
-
-    public void setListener(MyOnClickListener listener) {
-        this.listener = (ListAdapter.MyOnClickListener) listener;
+    public void setListenerPeople(MyOnClickListener listenerPeople) {
+        this.listenerPeople = listenerPeople;
     }
 
     public ListAdapterPeople(Context context, ArrayList<User> peopleArrayList) {
@@ -38,7 +34,7 @@ public class ListAdapterPeople extends RecyclerView.Adapter<ListAdapterPeople.Vi
     @Override
     public ListAdapterPeople.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.people_item, parent, false);
-        return new ListAdapterPeople.ViewHolder(view, listener);
+        return new ListAdapterPeople.ViewHolder(view, listenerPeople);
     }
 
     @Override
@@ -58,9 +54,9 @@ public class ListAdapterPeople extends RecyclerView.Adapter<ListAdapterPeople.Vi
         private TextView last_name;
 
         private LinearLayout linearLayout;
-        private ListAdapter.MyOnClickListener listener;
+        private MyOnClickListener listener;
 
-        public ViewHolder(@NonNull View itemView, ListAdapter.MyOnClickListener listener) {
+        public ViewHolder(@NonNull View itemView, MyOnClickListener listener) {
             super(itemView);
 
             name = itemView.findViewById(R.id.itemName);

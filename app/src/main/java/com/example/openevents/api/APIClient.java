@@ -1,6 +1,7 @@
 package com.example.openevents.api;
 
 import com.example.openevents.business.Event;
+import com.example.openevents.business.Statistic;
 import com.example.openevents.business.Token;
 import com.example.openevents.business.User;
 
@@ -9,6 +10,7 @@ import org.json.JSONObject;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Stack;
 
 import retrofit2.Callback;
 import retrofit2.Retrofit;
@@ -63,4 +65,12 @@ public class APIClient {
         this.service.showEventInfo(token, id).enqueue(callback);
     }
 
+    public void showPersonInfo(String token, int id, Callback<Statistic> callback) {
+        this.service.showPersonInfo(token, id).enqueue(callback);
+    }
+
+
+    /*public void showFriendPerson(String token, int id, Callback<ArrayList<User>> callback) {
+        this.service.showPersonInfo(token, id).enqueue(callback);
+    }*/
 }
