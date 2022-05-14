@@ -96,6 +96,16 @@ public class EventInfoFragment extends Fragment {
         return v;
     }
 
+    private void fillTempInfo() {
+        name.setText("---");
+        description.setText("---");
+        startDate.setText("---");
+        endDate.setText("---");
+        participants.setText(String.valueOf(0));
+        location.setText("---");
+        type.setText("---");
+    }
+
     private void configView(View v) {
         name = v.findViewById(R.id.itemName);
         description = v.findViewById(R.id.description);
@@ -104,6 +114,7 @@ public class EventInfoFragment extends Fragment {
         participants = v.findViewById(R.id.participants);
         location = v.findViewById(R.id.location);
         type = v.findViewById(R.id.tag);
+        fillTempInfo();
     }
 
 

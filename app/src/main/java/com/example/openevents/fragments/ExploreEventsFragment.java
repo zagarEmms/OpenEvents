@@ -19,6 +19,7 @@ import com.example.openevents.R;
 import com.example.openevents.api.APIClient;
 import com.example.openevents.business.Event;
 import com.example.openevents.recyclerView.ListAdapter;
+import com.example.openevents.recyclerView.MyOnClickListener;
 
 import java.util.ArrayList;
 
@@ -27,9 +28,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class ExploreEventsFragment extends Fragment implements ListAdapter.MyOnClickListener {
+public class ExploreEventsFragment extends Fragment implements MyOnClickListener {
 
-    private static final Bundle bundle = new Bundle();
+    private final Bundle bundle = new Bundle();
     private RecyclerView recyclerView;
     private String token;
     private ListAdapter adapter;
@@ -55,7 +56,6 @@ public class ExploreEventsFragment extends Fragment implements ListAdapter.MyOnC
                 } else {
                     Log.i("GET","EVENTS WENT WELL!" + response.body());
                     eventArrayList.addAll(response.body());
-                    Log.i("GET", eventArrayList.get(2).getName());
 
                     adapter.notifyDataSetChanged();
 
@@ -64,7 +64,7 @@ public class ExploreEventsFragment extends Fragment implements ListAdapter.MyOnC
 
             @Override
             public void onFailure(Call<ArrayList<Event>> call, Throwable t) {
-                Log.i("GET","LOG IN KO!");
+                Log.i("GET","EXPLORE EVENTS KO!");
                 Toast toast =
                         Toast.makeText(getContext(), "CONNECTION ERROR", Toast.LENGTH_LONG);
                 toast.setGravity(Gravity.TOP, 0,0);
@@ -109,6 +109,7 @@ public class ExploreEventsFragment extends Fragment implements ListAdapter.MyOnC
 
         return v;
     }
+
 
     @Override
     public void myOnClick(View view, int position) {
