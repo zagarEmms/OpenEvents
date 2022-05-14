@@ -4,6 +4,7 @@ import com.example.openevents.business.Event;
 import com.example.openevents.business.Statistic;
 import com.example.openevents.business.Token;
 import com.example.openevents.business.User;
+import com.example.openevents.business.UserEventRequest;
 import com.google.gson.JsonObject;
 
 import org.json.JSONObject;
@@ -45,5 +46,12 @@ public interface JSONPlaceHolder {
     @GET("users/{id}/statistics")
     Call<Statistic> showPersonInfo (@Header("Authorization") String token, @Query("id") int id);
 
+    @GET("users/{id}/friends")
+    Call<ArrayList<User>> showFriendPerson(@Header("Authorization") String token, @Query("id") int id);
 
+    @POST("friends/{id}")
+    Call<UserEventRequest> addFriendApi(@Header("Authorization") String token, @Query("id") int id);
+
+    @POST("users/{id}/assistances")
+    Call<UserEventRequest> joinEvent(@Header("Authorization") String token, @Query("id") int id);
 }

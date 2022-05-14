@@ -28,7 +28,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class PeopleFragment extends Fragment implements MyOnClickListener{
+public class PeopleFragment extends Fragment implements MyOnClickListener {
 
     private final Bundle bundle = new Bundle();
     private RecyclerView recyclerView;

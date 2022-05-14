@@ -4,13 +4,9 @@ import com.example.openevents.business.Event;
 import com.example.openevents.business.Statistic;
 import com.example.openevents.business.Token;
 import com.example.openevents.business.User;
-
-import org.json.JSONObject;
-
-import org.json.JSONObject;
+import com.example.openevents.business.UserEventRequest;
 
 import java.util.ArrayList;
-import java.util.Stack;
 
 import retrofit2.Callback;
 import retrofit2.Retrofit;
@@ -70,7 +66,15 @@ public class APIClient {
     }
 
 
-    /*public void showFriendPerson(String token, int id, Callback<ArrayList<User>> callback) {
-        this.service.showPersonInfo(token, id).enqueue(callback);
-    }*/
+    public void showFriendPerson(String token, int id, Callback<ArrayList<User>> callback) {
+        this.service.showFriendPerson(token, id).enqueue(callback);
+    }
+
+    public void addFriendApi(String token, int id, Callback<UserEventRequest> callback) {
+        this.service.addFriendApi(token, id).enqueue(callback);
+    }
+
+    public void joinEvent(String token, int id, Callback<UserEventRequest> callback) {
+        this.service.joinEvent(token, id).enqueue(callback);
+    }
 }

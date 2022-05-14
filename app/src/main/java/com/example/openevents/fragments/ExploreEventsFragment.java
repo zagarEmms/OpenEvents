@@ -13,6 +13,8 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.openevents.R;
@@ -34,6 +36,8 @@ public class ExploreEventsFragment extends Fragment implements MyOnClickListener
     private RecyclerView recyclerView;
     private String token;
     private ListAdapter adapter;
+
+    private Spinner spinner;
 
     private ArrayList<Event> eventArrayList = new ArrayList<>();
 
@@ -85,6 +89,20 @@ public class ExploreEventsFragment extends Fragment implements MyOnClickListener
                 10, "---"));
     }
 
+    public void setSpinner () {
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int position, long id) {
+                //Gets the position -> category
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -92,6 +110,9 @@ public class ExploreEventsFragment extends Fragment implements MyOnClickListener
         View v = inflater.inflate(R.layout.fragment_explore_events, container, false);
 
         token = getArguments().getString("TOKEN");
+
+        spinner = v.findViewById(R.id.spinner_filter_category);
+        setSpinner();
 
         recyclerView = v.findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);

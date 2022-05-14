@@ -9,12 +9,14 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.openevents.R;
 import com.example.openevents.api.APIClient;
 import com.example.openevents.business.Event;
+import com.example.openevents.business.UserEventRequest;
 
 import java.util.ArrayList;
 
@@ -23,7 +25,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class EventInfoFragment extends Fragment {
+public class EventInfoFragment extends Fragment implements View.OnClickListener {
 
     private String token;
     private int id;
@@ -77,6 +79,38 @@ public class EventInfoFragment extends Fragment {
         type.setText(response.body().get(0).getType());
     }
 
+    private void joinEventApi() {
+        APIClient.getInstance().joinEvent(token, id, new Callback<UserEventRequest>() {
+            @Override
+            public void onResponse(Call<UserEventRequest> call, Response<UserEventRequest> response) {
+
+                if (response.body() == null) {
+                    Log.i("GET","JOIN WENT WELL!" + response.body());
+                    Toast toast =
+                            Toast.makeText(getContext(), "Not event found", Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.TOP, 0,0);
+                    toast.show();
+
+                } else {
+                    Log.i("GET","JOIN WENT WELL!" + response.body());
+                    Toast toast =
+                            Toast.makeText(getContext(), "YOU HAVE JOINED THE EVENT :)", Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.BOTTOM, 0,10);
+                    toast.show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UserEventRequest> call, Throwable t) {
+                Log.i("GET","JOIN KO!");
+                Toast toast =
+                        Toast.makeText(getContext(), "CONNECTION ERROR", Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.CENTER_VERTICAL, 0,0);
+                toast.show();
+            }
+        });
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -92,6 +126,7 @@ public class EventInfoFragment extends Fragment {
         Log.i("EVENT", String.valueOf(id));
 
         getInfoAPI();
+        onClick(v);
 
         return v;
     }
@@ -115,6 +150,19 @@ public class EventInfoFragment extends Fragment {
         location = v.findViewById(R.id.location);
         type = v.findViewById(R.id.tag);
         fillTempInfo();
+    }
+
+
+    @Override
+    public void onClick(View view) {
+        Button join = view.findViewById(R.id.join);
+        join.setOnClickListener(new View.OnClickListener() {
+                  @Override
+                  public void onClick(View view) {
+                      joinEventApi();
+                }
+            }
+        );
     }
 
 
