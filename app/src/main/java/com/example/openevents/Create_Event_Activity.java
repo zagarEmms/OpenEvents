@@ -21,8 +21,13 @@ import android.widget.Toast;
 
 import com.example.openevents.api.APIClient;
 import com.example.openevents.business.Event;
+import com.example.openevents.business.EventCreation;
 import com.example.openevents.business.Token;
 import com.example.openevents.business.User;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+
+import org.w3c.dom.Element;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -78,7 +83,7 @@ public class Create_Event_Activity extends AppCompatActivity implements AdapterV
         Log.i("GET","START SELECTED: " + eventStart_date);
         Log.i("GET","END SELECTED: " + eventEnd_date);
 
-        Event event = new Event(title.getText().toString(), image, location.getText().toString(), description.getText().toString(), eventStart_date, eventEnd_date, n_participators, category);
+        EventCreation event = new EventCreation(title.getText().toString(), image, location.getText().toString(), description.getText().toString(), eventStart_date, eventEnd_date, n_participators, category);
 
         APIClient.getInstance().createEvent(getToken(), event, new Callback<Event>() {
             @Override
@@ -93,7 +98,7 @@ public class Create_Event_Activity extends AppCompatActivity implements AdapterV
                     toast1.show();
                 } else {
                     Log.i("GET","GET WENT WELL!\n" + response.body().getName());
-                    //changeActivity();
+                    changeActivity();
                 }
             }
 

@@ -14,6 +14,7 @@ public class Event implements Serializable {
     private String type;
     private String date;
     private int id;
+    private int owner_id;
 
     public Event(String name, String image, String location, String description, String eventStart_date, String eventEnd_date, int n_participators, String type) {
         this.name = name;
@@ -26,7 +27,7 @@ public class Event implements Serializable {
         this.type = type;
     }
 
-    public Event(String name, String image, String location, String description, String eventStart_date, String eventEnd_date, int n_participators, String type, String date, int id) {
+    public Event(String name, String image, String location, String description, String eventStart_date, String eventEnd_date, int n_participators, String type, String date, int id, int owner_id) {
         this.name = name;
         this.image = image;
         this.location = location;
@@ -37,6 +38,7 @@ public class Event implements Serializable {
         this.type = type;
         this.date = date;
         this.id = id;
+        this.owner_id = owner_id;
     }
 
     public String getName() {
@@ -73,5 +75,9 @@ public class Event implements Serializable {
 
     public int getId() {
         return id;
+    }
+
+    public int getOwner_id() {
+        return owner_id;
     }
 }

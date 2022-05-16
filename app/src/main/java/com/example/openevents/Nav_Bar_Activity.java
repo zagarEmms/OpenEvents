@@ -16,11 +16,15 @@ import com.example.openevents.fragments.SearchFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
+import java.util.ArrayList;
+
 public class Nav_Bar_Activity extends AppCompatActivity implements NavigationBarView.OnItemSelectedListener {
 
     BottomNavigationView bottomNavView;
 
     private static Bundle bundle = new Bundle();
+    private static Bundle bundle2 = new Bundle();
+    private ArrayList<String> stringArrayList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,12 +36,16 @@ public class Nav_Bar_Activity extends AppCompatActivity implements NavigationBar
         bottomNavView.setOnItemSelectedListener(this);
         bottomNavView.setSelectedItemId(R.id.home);
 
-        bundle.putString("TOKEN", getToken());
-    }
+        stringArrayList.add(getToken());
+        stringArrayList.add(getOwnerId());
 
+        bundle.putString("TOKEN", getToken());
+        bundle2.putStringArrayList("VIP", stringArrayList);
+    }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
         int id = item.getItemId();
 
         if (id == R.id.home) {
@@ -47,7 +55,7 @@ public class Nav_Bar_Activity extends AppCompatActivity implements NavigationBar
             return true;
         } else if (id == R.id.myevents) {
             MyEventsFragment myEventsFragment = new MyEventsFragment();
-            myEventsFragment.setArguments(bundle);
+            myEventsFragment.setArguments(bundle2);
             getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, myEventsFragment).commit();
             return true;
         } else if (id == R.id.search) {
@@ -68,6 +76,13 @@ public class Nav_Bar_Activity extends AppCompatActivity implements NavigationBar
         }
 
         return false;
+    }
+
+    private String getOwnerId () {
+
+        SharedPreferences prefs = this.getSharedPreferences("ID", Context.MODE_PRIVATE);
+        return Integer.toString(prefs.getInt("ID", 1));
+
     }
 
     private String getToken() {

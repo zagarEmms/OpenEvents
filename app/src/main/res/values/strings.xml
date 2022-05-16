@@ -15,7 +15,7 @@
     <string name="create_description">Description</string>
     <string name="create_start_date">Start date</string>
     <string name="create_end_date">End date</string>
-    <string name="create_event">Create Event</string>
+    <string name="create_event">Create Event ✍️</string>
     <string name="create_location">Location (min length 5)</string>
     <string name="create_start_time">Start time</string>
     <string name="create_end_time">End time</string>
@@ -26,7 +26,11 @@
     <string name="search_text">Search for name, last name or email</string>
     <string name="search_results">0 matching result found:</string>
     <string name="title_my_events">My Events 🥳</string>
-
+    <string name="title_comment">Comment and Rate 🤭</string>
+    <string name="comment_butt">SUBMIT</string>
+    <string name="comment_comment">Comment</string>
+    <string name="comment_rating">Rating (0 to 10)</string>
+    <string name="comment_event">---</string>
     <string name="their_friends">THEIR FRIENDS</string>
     <string name="their_statistics">THEIR STATISTICS</string>
     <string name="score">Score: %1$s</string>
