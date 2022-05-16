@@ -53,7 +53,7 @@ public class ExploreEventsFragment extends Fragment implements MyOnClickListener
 
                 if (response.body() == null) {
                     Toast toast =
-                            Toast.makeText(getContext(), "Not events found", Toast.LENGTH_LONG);
+                            Toast.makeText(getContext(), "0 EVENTS FOUND", Toast.LENGTH_LONG);
                     toast.setGravity(Gravity.TOP, 0,0);
                     toast.show();
 

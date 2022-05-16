@@ -1,6 +1,8 @@
 package com.example.openevents.api;
 
+import com.example.openevents.business.Assistance;
 import com.example.openevents.business.Event;
+import com.example.openevents.business.EventCreation;
 import com.example.openevents.business.Statistic;
 import com.example.openevents.business.Token;
 import com.example.openevents.business.User;
@@ -17,6 +19,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -29,7 +32,7 @@ public interface JSONPlaceHolder {
     Call<Token> logIn(@Body User user);
 
     @POST("events/")
-    Call<Event> createEvent(@Header("Authorization") String token, @Body Event event);
+    Call<Event> createEvent(@Header("Authorization") String token, @Body EventCreation event);
 
     @GET("events/")
     Call<ArrayList<Event>> showEvents (@Header("Authorization") String token);
@@ -54,4 +57,8 @@ public interface JSONPlaceHolder {
 
     @POST("users/{id}/assistances")
     Call<UserEventRequest> joinEvent(@Header("Authorization") String token, @Query("id") int id);
+
+    @PUT("/assistances/{user_id}/{event_id}/")
+    Call<ArrayList<User>> postComment (@Header("Authorization") String token, @Body Assistance assistance, @Path("user_id") int user_id, @Path("event_id") int event_id);
+
 }
