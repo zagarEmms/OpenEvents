@@ -146,7 +146,7 @@ public class PersonFragment extends Fragment implements MyOnClickListener, View.
                 } else {
                     Toast toast =
                             Toast.makeText(getContext(), "YOUR FRIENDSHIP REQUEST HAS BEEN SENT :)", Toast.LENGTH_LONG);
-                    toast.setGravity(Gravity.BOTTOM, 0,10);
+                    toast.setGravity(Gravity.TOP, 0,10);
                     toast.show();
 
                     Log.i("friend","FRIEND REQUEST WENT WELL!" + response.body());

@@ -37,6 +37,9 @@ public interface JSONPlaceHolder {
     @GET("events/")
     Call<ArrayList<Event>> showEvents (@Header("Authorization") String token);
 
+    @GET("events/best")
+    Call<ArrayList<Event>> showEventsScore (@Header("Authorization") String token);
+
     @GET("events/{id}")
     Call<ArrayList<Event>> showEventInfo(@Header("Authorization") String token, @Path("id") int id);
 
@@ -47,16 +50,16 @@ public interface JSONPlaceHolder {
     Call<ArrayList<User>> showPeopleSearch (@Header("Authorization") String token, @Query("s") String query);
 
     @GET("users/{id}/statistics")
-    Call<Statistic> showPersonInfo (@Header("Authorization") String token, @Query("id") int id);
+    Call<Statistic> showPersonInfo (@Header("Authorization") String token, @Path("id") int id);
 
     @GET("users/{id}/friends")
-    Call<ArrayList<User>> showFriendPerson(@Header("Authorization") String token, @Query("id") int id);
+    Call<ArrayList<User>> showFriendPerson(@Header("Authorization") String token, @Path("id") int id);
 
     @POST("friends/{id}")
-    Call<UserEventRequest> addFriendApi(@Header("Authorization") String token, @Query("id") int id);
+    Call<UserEventRequest> addFriendApi(@Header("Authorization") String token, @Path("id") int id);
 
     @POST("users/{id}/assistances")
-    Call<UserEventRequest> joinEvent(@Header("Authorization") String token, @Query("id") int id);
+    Call<UserEventRequest> joinEvent(@Header("Authorization") String token, @Path("id") int id);
 
     @PUT("/assistances/{user_id}/{event_id}/")
     Call<ArrayList<User>> postComment (@Header("Authorization") String token, @Body Assistance assistance, @Path("user_id") int user_id, @Path("event_id") int event_id);

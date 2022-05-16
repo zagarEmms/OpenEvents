@@ -78,4 +78,8 @@ public class APIClient {
     public void joinEvent(String token, int id, Callback<UserEventRequest> callback) {
         this.service.joinEvent(token, id).enqueue(callback);
     }
+
+    public void showEventsScore(String token, Callback<ArrayList<Event>> callback) {
+        this.service.showEventsScore(token).enqueue(callback);
+    }
 }
