@@ -36,9 +36,8 @@
     <string name="score">Score: %1$s</string>
     <string name="comments">Number of comments: %1$d</string>
     <string name="commenters">\%% of commenters: %01$s</string>
-
-
-
+    <string name="join">JOIN IN!</string>
+    <string name="edit_event">EDIT EVENT</string>
 
 
     <string-array name="dropCategories">

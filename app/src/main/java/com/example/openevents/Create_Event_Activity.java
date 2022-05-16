@@ -2,6 +2,7 @@ package com.example.openevents;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NavUtils;
 
 import android.content.Context;
 import android.content.Intent;
@@ -52,9 +53,9 @@ public class Create_Event_Activity extends AppCompatActivity implements AdapterV
     private Spinner spinner;
 
     public void changeActivity () {
-        Intent intent = new Intent();
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
+        Intent parentIntent = NavUtils.getParentActivityIntent(this);
+        parentIntent.setFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT | Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        startActivity(parentIntent);
         finish();
     }
 

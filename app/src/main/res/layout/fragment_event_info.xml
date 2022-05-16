@@ -169,7 +169,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="join in!"
+            android:text="@string/join"
             android:layout_gravity="center_horizontal"
             android:backgroundTint="#254973"
             android:id="@+id/join"

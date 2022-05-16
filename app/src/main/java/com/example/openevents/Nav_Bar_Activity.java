@@ -50,7 +50,7 @@ public class Nav_Bar_Activity extends AppCompatActivity implements NavigationBar
 
         if (id == R.id.home) {
             ExploreEventsFragment exploreEventsFragment = new ExploreEventsFragment();
-            exploreEventsFragment.setArguments(bundle);
+            exploreEventsFragment.setArguments(bundle2);
             getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, exploreEventsFragment).commit();
             return true;
         } else if (id == R.id.myevents) {

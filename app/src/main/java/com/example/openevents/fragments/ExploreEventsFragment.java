@@ -36,6 +36,7 @@ public class ExploreEventsFragment extends Fragment implements MyOnClickListener
     private RecyclerView recyclerView;
     private String token;
     private ListAdapter adapter;
+    private int owner_id;
 
     private Spinner spinner;
 
@@ -109,7 +110,8 @@ public class ExploreEventsFragment extends Fragment implements MyOnClickListener
 
         View v = inflater.inflate(R.layout.fragment_explore_events, container, false);
 
-        token = getArguments().getString("TOKEN");
+        owner_id = Integer.parseInt(getArguments().getStringArrayList("VIP").get(1));
+        token = getArguments().getStringArrayList("VIP").get(0);
 
         spinner = v.findViewById(R.id.spinner_filter_category);
         setSpinner();
@@ -138,6 +140,7 @@ public class ExploreEventsFragment extends Fragment implements MyOnClickListener
         ArrayList<String> eventInfo = new ArrayList<>();
         eventInfo.add(token);
         eventInfo.add(String.valueOf(id));
+        eventInfo.add(String.valueOf(owner_id));
 
         bundle.putStringArrayList("EVENT_INFO",eventInfo);
 

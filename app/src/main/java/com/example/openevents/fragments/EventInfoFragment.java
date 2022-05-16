@@ -1,5 +1,7 @@
 package com.example.openevents.fragments;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -10,9 +12,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.openevents.Create_Event_Activity;
+import com.example.openevents.Edit_Event_Activity;
 import com.example.openevents.R;
 import com.example.openevents.api.APIClient;
 import com.example.openevents.business.Event;
@@ -25,10 +30,12 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class EventInfoFragment extends Fragment implements View.OnClickListener {
+public class EventInfoFragment extends Fragment {
 
     private String token;
     private int id;
+    private int owner_id;
+    private int event_owner_id;
     private TextView name;
     private TextView description;
     private TextView location;
@@ -41,7 +48,16 @@ public class EventInfoFragment extends Fragment implements View.OnClickListener 
         //Required empty public constructor
     }
 
-    public void getInfoAPI() {
+    public void editEvent () {
+
+        Intent i = new Intent(getActivity(), Edit_Event_Activity.class);
+        startActivity(i);
+        ((Activity) getActivity()).overridePendingTransition(0, 0);
+
+    }
+
+    public void getInfoAPI(View v) {
+
         APIClient.getInstance().showEventInfo(token, id, new Callback<ArrayList<Event>>() {
             @Override
             public void onResponse(Call<ArrayList<Event>> call, Response<ArrayList<Event>> response) {
@@ -55,6 +71,8 @@ public class EventInfoFragment extends Fragment implements View.OnClickListener 
                 } else {
                     Log.i("GET","EVENT WENT WELL!" + response.body());
                     fillAPIInfo(response);
+                    event_owner_id = response.body().get(0).getOwner_id();
+                    setButton(v);
                 }
             }
 
@@ -79,7 +97,8 @@ public class EventInfoFragment extends Fragment implements View.OnClickListener 
         type.setText(response.body().get(0).getType());
     }
 
-    private void joinEventApi() {
+    private void joinEventApi () {
+
         APIClient.getInstance().joinEvent(token, id, new Callback<UserEventRequest>() {
             @Override
             public void onResponse(Call<UserEventRequest> call, Response<UserEventRequest> response) {
@@ -111,6 +130,38 @@ public class EventInfoFragment extends Fragment implements View.OnClickListener 
         });
     }
 
+    public void setButton (View view) {
+
+        Button join = view.findViewById(R.id.join);
+
+        Log.i("OWNER", "Onwer_id: " + owner_id);
+        Log.i("OWNER", "Id: " + event_owner_id);
+
+
+        if (owner_id == event_owner_id) {
+
+            join.setText(getString(R.string.edit_event));
+            join.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        editEvent();
+                    }
+                }
+            );
+
+        } else {
+
+            join.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        joinEventApi();
+                    }
+                }
+            );
+
+        }
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -121,12 +172,9 @@ public class EventInfoFragment extends Fragment implements View.OnClickListener 
 
         token = getArguments().getStringArrayList("EVENT_INFO").get(0);
         id = Integer.parseInt (getArguments().getStringArrayList("EVENT_INFO").get(1));
+        owner_id = Integer.parseInt (getArguments().getStringArrayList("EVENT_INFO").get(2));
 
-        Log.i("EVENT", token);
-        Log.i("EVENT", String.valueOf(id));
-
-        getInfoAPI();
-        onClick(v);
+        getInfoAPI(v);
 
         return v;
     }
@@ -151,20 +199,4 @@ public class EventInfoFragment extends Fragment implements View.OnClickListener 
         type = v.findViewById(R.id.tag);
         fillTempInfo();
     }
-
-
-    @Override
-    public void onClick(View view) {
-        Button join = view.findViewById(R.id.join);
-        join.setOnClickListener(new View.OnClickListener() {
-                  @Override
-                  public void onClick(View view) {
-                      joinEventApi();
-                }
-            }
-        );
-    }
-
-
-
 }

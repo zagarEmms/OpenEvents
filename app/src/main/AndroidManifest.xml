@@ -14,6 +14,9 @@
         android:theme="@style/Theme.OpenEvents"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".Edit_Event_Activity"
+            android:exported="false" />
+        <activity
             android:name=".Comment_Rate_Activity"
             android:exported="false" />
         <activity
