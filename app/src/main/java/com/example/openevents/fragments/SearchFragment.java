@@ -47,7 +47,6 @@ public class SearchFragment extends Fragment {
     public void getPeopleListAPI() {
 
         APIClient.getInstance().showPeopleSearch(token, inputSearch.getText().toString(), new Callback<ArrayList<User>>() {
-            @SuppressLint("SetTextI18n")
             @Override
             public void onResponse(Call<ArrayList<User>> call, Response<ArrayList<User>> response) {
 
@@ -125,4 +124,5 @@ public class SearchFragment extends Fragment {
 
         return v;
     }
+
 }

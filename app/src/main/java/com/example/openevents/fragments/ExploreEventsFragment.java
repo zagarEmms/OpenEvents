@@ -14,10 +14,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.openevents.R;
@@ -39,10 +39,12 @@ public class ExploreEventsFragment extends Fragment implements MyOnClickListener
     private RecyclerView recyclerView;
     private String token;
     private ListAdapter adapter;
+
     private int filtersStatus;
     private int owner_id;
-    private ImageView arrow;
     private ImageButton scoreFilter;
+    private TextView inputSearch;
+    private ImageView searchIcon;
 
     private Spinner spinner;
 
@@ -100,10 +102,11 @@ public class ExploreEventsFragment extends Fragment implements MyOnClickListener
                     eventArrayList.addAll(response.body());
                     adapter.notifyDataSetChanged();
 
-                    if (filtersStatus == 0){
-                        filtersStatus = 1;
-                    } else {
+                    if (filtersStatus == 1){
                         filtersStatus = 0;
+
+                    } else {
+                        filtersStatus = 1;
                         getEventsListAPI();
                     }
 
@@ -133,8 +136,7 @@ public class ExploreEventsFragment extends Fragment implements MyOnClickListener
                 10, "---"));
     }
 
-    private void setButtonScore(View v) {
-        scoreFilter = v.findViewById(R.id.filter_score);
+    private void setButtonScore() {
         scoreFilter.setOnClickListener(new View.OnClickListener() {
                @Override
                public void onClick(View view) {
@@ -239,15 +241,52 @@ public class ExploreEventsFragment extends Fragment implements MyOnClickListener
 
     }
 
+    private void setButtonSearch() {
+        Bundle bundleSearch = new Bundle();
+        ArrayList<String> eventSearchInfo = new ArrayList<>();
+        eventSearchInfo.add(token);
+        eventSearchInfo.add(String.valueOf(owner_id));
+
+        bundleSearch.putStringArrayList("EVENT_INFO",eventSearchInfo);
+
+        inputSearch.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View view) {
+                  searchFragment(bundleSearch);
+              }
+          }
+        );
+
+        searchIcon.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View view) {
+                  searchFragment(bundleSearch);
+              }
+          }
+        );
+    }
+
+    private void searchFragment(Bundle bundleSearch) {
+        SearchEventFragment searchEventFragment = new SearchEventFragment();
+        searchEventFragment.setArguments(bundleSearch);
+
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.flFragment, searchEventFragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_explore_events, container, false);
 
+        configView(v);
+
         token = getArguments().getStringArrayList("VIP").get(0);
         owner_id = Integer.parseInt(getArguments().getStringArrayList("VIP").get(1));
-        spinner = v.findViewById(R.id.spinner_filter_category);
 
         recyclerView = v.findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
@@ -259,11 +298,20 @@ public class ExploreEventsFragment extends Fragment implements MyOnClickListener
         recyclerView.setAdapter(adapter);
         adapter.setListener(this);
 
-        setButtonScore(v);
+        setButtonScore();
         getEventsListAPI();
         setSpinner();
+        setButtonSearch();
 
         return v;
+    }
+
+    private void configView(View v) {
+        scoreFilter = v.findViewById(R.id.filter_score);
+        inputSearch = v.findViewById(R.id.eventSearch);
+        searchIcon = v.findViewById(R.id.eventIconSearch);
+        spinner = v.findViewById(R.id.spinner_filter_category);
+        inputSearch = v.findViewById(R.id.eventSearch);
     }
 
 

@@ -53,7 +53,7 @@ public class PersonFragment extends Fragment implements MyOnClickListener, View.
     }
 
     public void getInfoScore() {
-        APIClient.getInstance().showPersonInfo(token, id, new Callback<Statistic>() {
+        APIClient.getInstance().showPersonStatsInfo(token, id, new Callback<Statistic>() {
             @Override
             public void onResponse(Call<Statistic> call, Response<Statistic> response) {
 
@@ -181,7 +181,6 @@ public class PersonFragment extends Fragment implements MyOnClickListener, View.
         bundle = getArguments().getStringArrayList("PEOPLE_INFO");
 
         token = bundle.get(0);
-
         id = Integer.parseInt (bundle.get(1));
 
         Log.i("friend", String.valueOf(id));

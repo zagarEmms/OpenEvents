@@ -8,7 +8,7 @@
     tools:context=".Nav_Bar_Activity">
 
     <FrameLayout
-        android:id="@+id/header_layout"
+        android:id="@+id/main_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="20dp"
@@ -16,6 +16,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:background="#EFF4FA">
+        <TextView
+            android:id="@+id/main_title_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:textSize="20sp"
+            android:textColor="@color/black" />
     </FrameLayout>
 
     <LinearLayout
@@ -23,7 +30,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@+id/header_layout">
+        app:layout_constraintTop_toBottomOf="@+id/main_title">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -86,7 +93,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:backgroundTint="#4A688C"
-                android:text="follow"
+                android:text="EDIT"
                 android:textSize="15sp" />
         </FrameLayout>
 
@@ -102,7 +109,7 @@
                 android:layout_marginHorizontal="50dp"
                 android:background="#EFF4FA"
                 android:paddingVertical="5dp"
-                android:text="@string/their_statistics"
+                android:text="@string/my_statistics"
                 android:textAlignment="center"
                 android:textSize="15sp"
                 android:textStyle="bold" />
@@ -117,19 +124,19 @@
                     android:id="@+id/score"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="SCORE"/>
+                    android:text="SCORE"></TextView>
 
                 <TextView
                     android:id="@+id/num_comments"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="NUM_COMMENTS"/>
+                    android:text="NUM_COMMENTS"></TextView>
 
                 <TextView
                     android:id="@+id/comeneters"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="COMMENTERS_AVG"/>
+                    android:text="COMMENTERS_AVG"></TextView>
 
             </LinearLayout>
 
@@ -149,12 +156,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:text="@string/their_friends"
+                android:text="@string/my_friends"
                 android:textSize="15sp"
                 android:textStyle="bold" />
         </FrameLayout>
 
         <FrameLayout
+            android:id="@+id/ly_recyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="50dp"
@@ -165,6 +173,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="10dp" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@+id/ly_recyclerView">
+
+            <Button
+                android:id="@+id/log_out"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:backgroundTint="#932A2A"
+                android:text="log out"
+                android:textSize="15sp" />
         </FrameLayout>
 
     </LinearLayout>

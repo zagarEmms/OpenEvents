@@ -1,6 +1,5 @@
 package com.example.openevents.api;
 
-import com.example.openevents.business.Assistance;
 import com.example.openevents.business.Event;
 import com.example.openevents.business.EventCreation;
 import com.example.openevents.business.Statistic;
@@ -63,8 +62,8 @@ public class APIClient {
         this.service.showEventInfo(token, id).enqueue(callback);
     }
 
-    public void showPersonInfo(String token, int id, Callback<Statistic> callback) {
-        this.service.showPersonInfo(token, id).enqueue(callback);
+    public void showPersonStatsInfo(String token, int id, Callback<Statistic> callback) {
+        this.service.showPersonStatsInfo(token, id).enqueue(callback);
     }
 
     public void showFriendPerson(String token, int id, Callback<ArrayList<User>> callback) {
@@ -81,5 +80,13 @@ public class APIClient {
 
     public void showEventsScore(String token, Callback<ArrayList<Event>> callback) {
         this.service.showEventsScore(token).enqueue(callback);
+    }
+
+    public void getProfileInfo(String token, int id, Callback<ArrayList<User>> callback){
+        this.service.getProfileInfo(token, id).enqueue(callback);
+    }
+
+    public void showEventsSearched(String token, String keyword, String location, String date, Callback<ArrayList<Event>> callback) {
+        this.service.showEventsSearched(token, keyword, location, date).enqueue(callback);
     }
 }

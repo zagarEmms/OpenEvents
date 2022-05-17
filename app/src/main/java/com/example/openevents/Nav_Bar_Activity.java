@@ -11,7 +11,7 @@ import android.view.MenuItem;
 import com.example.openevents.fragments.ExploreEventsFragment;
 import com.example.openevents.fragments.MyEventsFragment;
 import com.example.openevents.fragments.PeopleFragment;
-import com.example.openevents.fragments.PersonFragment;
+import com.example.openevents.fragments.ProfileFragment;
 import com.example.openevents.fragments.SearchFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -68,10 +68,10 @@ public class Nav_Bar_Activity extends AppCompatActivity implements NavigationBar
             peopleFragment.setArguments(bundle);
             getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, peopleFragment).commit();
             return true;
-        } else if (id == R.id.person) {
-            PersonFragment personFragment = new PersonFragment();
-            personFragment.setArguments(bundle);
-            getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, personFragment).commit();
+        } else if (id == R.id.profile) {
+            ProfileFragment profileFragment = new ProfileFragment();
+            profileFragment.setArguments(bundle2);
+            getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, profileFragment).commit();
             return true;
         }
 

@@ -50,7 +50,7 @@ public interface JSONPlaceHolder {
     Call<ArrayList<User>> showPeopleSearch (@Header("Authorization") String token, @Query("s") String query);
 
     @GET("users/{id}/statistics")
-    Call<Statistic> showPersonInfo (@Header("Authorization") String token, @Path("id") int id);
+    Call<Statistic> showPersonStatsInfo(@Header("Authorization") String token, @Path("id") int id);
 
     @GET("users/{id}/friends")
     Call<ArrayList<User>> showFriendPerson(@Header("Authorization") String token, @Path("id") int id);
@@ -64,4 +64,9 @@ public interface JSONPlaceHolder {
     @PUT("/assistances/{user_id}/{event_id}/")
     Call<ArrayList<User>> postComment (@Header("Authorization") String token, @Body Assistance assistance, @Path("user_id") int user_id, @Path("event_id") int event_id);
 
+    @GET("users/{id}")
+    Call<ArrayList<User>> getProfileInfo(@Header("Authorization") String token, @Path("id") int id);
+
+    @GET("events/search/")
+    Call<ArrayList<Event>> showEventsSearched(@Header("Authorization") String token, @Query("location") String location, @Query("keyword") String keyword, @Query("location") String date);
 }

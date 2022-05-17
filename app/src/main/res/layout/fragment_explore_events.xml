@@ -30,59 +30,95 @@
         android:id="@+id/linearLayoutFilters"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/frameLayout"
         android:orientation="horizontal"
-        android:paddingVertical="10dp">
+        android:paddingVertical="10dp"
+        android:layout_marginHorizontal="10dp"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="40dp"
             android:orientation="horizontal">
+
             <ImageButton
                 android:id="@+id/filter_score"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
+                android:backgroundTint="#92C7D9ED"
                 app:srcCompat="@drawable/ic_star"
-                android:backgroundTint="#92C7D9ED" />
+                android:clickable="true"
+                android:focusable="true" />
+
             <ImageView
                 android:id="@+id/arrow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/ic_arrow_upward"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/ic_arrow_upward" />
         </LinearLayout>
 
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:background="#92C7D9ED">
+            android:background="#92C7D9ED"
+            android:layout_marginStart="40dp">
+
             <Spinner
                 android:id="@+id/spinner_filter_category"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:spinnerMode="dropdown"
+                android:entries="@array/dropCategories"
                 android:popupBackground="@android:drawable/btn_dropdown"
-                android:entries="@array/dropCategories"/>
+                android:spinnerMode="dropdown" />
         </LinearLayout>
-
-
 
     </LinearLayout>
 
     <FrameLayout
+        android:id="@+id/frameLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#D3E1F1"
+        android:layout_marginVertical="5dp"
+        android:layout_marginHorizontal="20dp"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="10dp"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutFilters">
+
+        <TextView
+            android:id="@+id/eventSearch"
+            android:text="@string/searchEvent_keyword"
+            android:textStyle="bold"
+            android:textSize="17dp"
+            android:layout_gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <ImageView
+            android:id="@+id/eventIconSearch"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="300dp"
+            app:srcCompat="@drawable/search_blue" />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/frameLayout10"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayoutFilters">
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout2">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginBottom="150dp"
-            android:padding="10dp"/>
+            android:padding="10dp" />
     </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
