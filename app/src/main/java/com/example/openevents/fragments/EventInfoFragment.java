@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
 import android.view.Gravity;
@@ -20,6 +22,7 @@ import com.example.openevents.Create_Event_Activity;
 import com.example.openevents.Edit_Event_Activity;
 import com.example.openevents.R;
 import com.example.openevents.api.APIClient;
+import com.example.openevents.business.DeleteEvent;
 import com.example.openevents.business.Event;
 import com.example.openevents.business.UserEventRequest;
 
@@ -32,6 +35,7 @@ import retrofit2.Response;
 
 public class EventInfoFragment extends Fragment {
 
+    private final Bundle bundle = new Bundle();
     private String token;
     private int id;
     private int owner_id;
@@ -43,6 +47,9 @@ public class EventInfoFragment extends Fragment {
     private TextView endDate;
     private TextView participants;
     private TextView type;
+    private ArrayList<String> eventInfo = new ArrayList<>();
+    private ArrayList<String> vipArrayList = new ArrayList<>();
+    private Button deleteButton;
 
     public EventInfoFragment() {
         //Required empty public constructor
@@ -51,10 +58,67 @@ public class EventInfoFragment extends Fragment {
     public void editEvent () {
 
         Intent i = new Intent(getActivity(), Edit_Event_Activity.class);
+        i.putStringArrayListExtra("EDIT_INFO", eventInfo);
         startActivity(i);
         ((Activity) getActivity()).overridePendingTransition(0, 0);
 
     }
+
+    public void changeFragment () {
+
+        vipArrayList.add(token);
+        vipArrayList.add(Integer.toString(owner_id));
+        bundle.putStringArrayList("VIP", vipArrayList);
+
+        MyEventsFragment myEventsFragment = new MyEventsFragment();
+        myEventsFragment.setArguments(bundle);
+
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.flFragment, myEventsFragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+
+    }
+
+    public void deleteApi () {
+
+        APIClient.getInstance().deleteEvent(token, id, new Callback<DeleteEvent>() {
+            @Override
+            public void onResponse(Call<DeleteEvent> call, Response<DeleteEvent> response) {
+
+                if (response.body() == null) {
+
+                    Toast toast =
+                            Toast.makeText(getContext(),
+                                    "ERROR DELETING!", Toast.LENGTH_SHORT);
+
+                    toast.setGravity(Gravity.TOP, 0, 0);
+                    toast.show();
+
+                } else {
+                    Log.i("GET","GET WENT WELL!\n" + response.body().getMensaje());
+                    changeFragment();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<DeleteEvent> call, Throwable t) {
+                Log.i("GET","KO!");
+                Toast toast2 =
+                        Toast.makeText(getContext(),
+                                "CONNECTION ERROR!", Toast.LENGTH_SHORT);
+
+                toast2.setGravity(Gravity.TOP, 0, 0);
+                toast2.show();
+            }
+        });
+    }
+
+    public void setDeleteButton (View v) {
+
+    }
+
 
     public void getInfoAPI(View v) {
 
@@ -88,6 +152,7 @@ public class EventInfoFragment extends Fragment {
     }
 
     private void fillAPIInfo(Response<ArrayList<Event>> response) {
+
         name.setText(response.body().get(0).getName());
         description.setText(response.body().get(0).getDescription());
         startDate.setText(response.body().get(0).getEventStart_date());
@@ -95,6 +160,16 @@ public class EventInfoFragment extends Fragment {
         participants.setText(String.valueOf(response.body().get(0).getN_participators()));
         location.setText(response.body().get(0).getLocation());
         type.setText(response.body().get(0).getType());
+
+        eventInfo.add(String.valueOf(id));
+        eventInfo.add(response.body().get(0).getName());
+        eventInfo.add(response.body().get(0).getDescription());
+        eventInfo.add(response.body().get(0).getEventStart_date());
+        eventInfo.add(response.body().get(0).getEventEnd_date());
+        eventInfo.add(Integer.toString(response.body().get(0).getN_participators()));
+        eventInfo.add(response.body().get(0).getLocation());
+        eventInfo.add(response.body().get(0).getType());
+
     }
 
     private void joinEventApi () {
@@ -133,18 +208,26 @@ public class EventInfoFragment extends Fragment {
     public void setButton (View view) {
 
         Button join = view.findViewById(R.id.join);
-
-        Log.i("OWNER", "Onwer_id: " + owner_id);
-        Log.i("OWNER", "Id: " + event_owner_id);
-
+        deleteButton = (Button) view.findViewById(R.id.delete);
+        deleteButton.setVisibility(View.GONE);
 
         if (owner_id == event_owner_id) {
+
+            deleteButton.setVisibility(View.VISIBLE);
+            deleteButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        deleteApi();
+                    }
+                }
+            );
 
             join.setText(getString(R.string.edit_event));
             join.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         editEvent();
+                        setDeleteButton(view);
                     }
                 }
             );

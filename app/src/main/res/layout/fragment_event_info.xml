@@ -175,6 +175,16 @@
             android:id="@+id/join"
             android:textSize="15sp"/>
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/delete_button"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#932A2A"
+            android:id="@+id/delete"
+            android:textSize="15sp"/>
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,7 @@
 package com.example.openevents.api;
 
 import com.example.openevents.business.Assistance;
+import com.example.openevents.business.DeleteEvent;
 import com.example.openevents.business.Event;
 import com.example.openevents.business.EventCreation;
 import com.example.openevents.business.Statistic;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
@@ -50,7 +52,7 @@ public interface JSONPlaceHolder {
     Call<ArrayList<User>> showPeopleSearch (@Header("Authorization") String token, @Query("s") String query);
 
     @GET("users/{id}/statistics")
-    Call<Statistic> showPersonStatsInfo(@Header("Authorization") String token, @Path("id") int id);
+    Call<Statistic> showPersonInfo (@Header("Authorization") String token, @Path("id") int id);
 
     @GET("users/{id}/friends")
     Call<ArrayList<User>> showFriendPerson(@Header("Authorization") String token, @Path("id") int id);
@@ -61,12 +63,14 @@ public interface JSONPlaceHolder {
     @POST("users/{id}/assistances")
     Call<UserEventRequest> joinEvent(@Header("Authorization") String token, @Path("id") int id);
 
-    @PUT("/assistances/{user_id}/{event_id}/")
+    @PUT("assistances/{user_id}/{event_id}/")  //currently in development
     Call<ArrayList<User>> postComment (@Header("Authorization") String token, @Body Assistance assistance, @Path("user_id") int user_id, @Path("event_id") int event_id);
 
-    @GET("users/{id}")
-    Call<ArrayList<User>> getProfileInfo(@Header("Authorization") String token, @Path("id") int id);
+    @PUT("events/{id}")
+    Call<Event> editEvent (@Header("Authorization") String token, @Body EventCreation event, @Path("id") int id);
 
-    @GET("events/search/")
-    Call<ArrayList<Event>> showEventsSearched(@Header("Authorization") String token, @Query("location") String location, @Query("keyword") String keyword, @Query("location") String date);
+    @DELETE("events/{id}")
+    Call<DeleteEvent> deleteEvent (@Header("Authorization") String token, @Path("id") int id);
+
+
 }

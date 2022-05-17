@@ -5,6 +5,8 @@ import android.media.Image;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,6 +24,7 @@ import com.example.openevents.R;
 import com.example.openevents.api.APIClient;
 import com.example.openevents.business.User;
 import com.example.openevents.recyclerView.ListAdapterPeople;
+import com.example.openevents.recyclerView.MyOnClickListener;
 
 import java.util.ArrayList;
 
@@ -30,8 +33,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class SearchFragment extends Fragment {
+public class SearchFragment extends Fragment implements MyOnClickListener {
 
+    private final Bundle bundle = new Bundle();
     private RecyclerView recyclerView;
     private ArrayList<User> peopleArrayList = new ArrayList<>();
     private String token;
@@ -47,6 +51,7 @@ public class SearchFragment extends Fragment {
     public void getPeopleListAPI() {
 
         APIClient.getInstance().showPeopleSearch(token, inputSearch.getText().toString(), new Callback<ArrayList<User>>() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onResponse(Call<ArrayList<User>> call, Response<ArrayList<User>> response) {
 
@@ -120,9 +125,34 @@ public class SearchFragment extends Fragment {
         adapter = new ListAdapterPeople(getContext(), peopleArrayList);
         recyclerView.setAdapter(adapter);
 
+        adapter.setListenerPeople(this);
+
         setButton(v);
 
         return v;
+    }
+
+    @Override
+    public void myOnClick(View view, int position) {
+
+        int id = peopleArrayList.get(position).getId();
+        ArrayList<String> personInfo = new ArrayList<>();
+        personInfo.add(token);
+        personInfo.add(String.valueOf(id));
+        personInfo.add(peopleArrayList.get(position).getName());
+        personInfo.add(peopleArrayList.get(position).getLastName());
+        personInfo.add(peopleArrayList.get(position).getEmail());
+
+        bundle.putStringArrayList("PEOPLE_INFO", personInfo);
+
+        PersonFragment personFragment = new PersonFragment();
+        personFragment.setArguments(bundle);
+
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.flFragment, personFragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
     }
 
 }
