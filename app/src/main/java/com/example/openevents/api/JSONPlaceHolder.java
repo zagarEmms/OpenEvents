@@ -1,6 +1,7 @@
 package com.example.openevents.api;
 
 import com.example.openevents.business.Assistance;
+import com.example.openevents.business.DeleteEvent;
 import com.example.openevents.business.Event;
 import com.example.openevents.business.EventCreation;
 import com.example.openevents.business.Statistic;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
@@ -61,11 +63,14 @@ public interface JSONPlaceHolder {
     @POST("users/{id}/assistances")
     Call<UserEventRequest> joinEvent(@Header("Authorization") String token, @Path("id") int id);
 
-    @PUT("/assistances/{user_id}/{event_id}/")  //currently in development
+    @PUT("assistances/{user_id}/{event_id}/")  //currently in development
     Call<ArrayList<User>> postComment (@Header("Authorization") String token, @Body Assistance assistance, @Path("user_id") int user_id, @Path("event_id") int event_id);
 
-    @PUT("/events/{id}")
+    @PUT("events/{id}")
     Call<Event> editEvent (@Header("Authorization") String token, @Body EventCreation event, @Path("id") int id);
+
+    @DELETE("events/{id}")
+    Call<DeleteEvent> deleteEvent (@Header("Authorization") String token, @Path("id") int id);
 
 
 }

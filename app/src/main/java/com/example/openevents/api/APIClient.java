@@ -1,6 +1,7 @@
 package com.example.openevents.api;
 
 import com.example.openevents.business.Assistance;
+import com.example.openevents.business.DeleteEvent;
 import com.example.openevents.business.Event;
 import com.example.openevents.business.EventCreation;
 import com.example.openevents.business.Statistic;
@@ -86,5 +87,10 @@ public class APIClient {
     public void editEvent(String token, EventCreation event, int id, Callback<Event> callback) {
         this.service.editEvent(token, event, id).enqueue(callback);
     }
+
+    public void deleteEvent(String token, int id, Callback<DeleteEvent> callback) {
+        this.service.deleteEvent(token, id).enqueue(callback);
+    }
+
 
 }

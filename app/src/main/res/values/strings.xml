@@ -41,6 +41,7 @@
     <string name="edit_title">Edit Event 🔧</string>
     <string name="edit_description">Fill the new information</string>
     <string name="edit_description_2">(date and time have to be filled)</string>
+    <string name="delete_button">DELETE EVENT</string>
 
 
 

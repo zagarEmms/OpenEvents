@@ -15,19 +15,14 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.openevents.Create_Event_Activity;
-import com.example.openevents.Log_In_Activity;
-import com.example.openevents.Nav_Bar_Activity;
 import com.example.openevents.R;
 import com.example.openevents.api.APIClient;
 import com.example.openevents.business.Event;
 import com.example.openevents.recyclerView.ListAdapter;
-import com.example.openevents.recyclerView.ListAdapterMyEvents;
 import com.example.openevents.recyclerView.MyOnClickListener;
 
 import java.util.ArrayList;
@@ -43,7 +38,7 @@ public class MyEventsFragment extends Fragment implements MyOnClickListener {
     private ArrayList<Event> eventArrayList = new ArrayList<>();
     private ArrayList<Event> myEventArrayList = new ArrayList<>();
     private String token;
-    private ListAdapterMyEvents adapter;
+    private ListAdapter adapter;
     private ImageView createIcon;
     private int owner_id;
     private Bundle bundle = new Bundle();
@@ -100,7 +95,6 @@ public class MyEventsFragment extends Fragment implements MyOnClickListener {
     public void setButton (View v) {
 
         createIcon = (ImageView) v.findViewById(R.id.createEvent);
-
         createIcon.setOnClickListener(new View.OnClickListener() {
                   @Override
                   public void onClick(View view) {
@@ -122,11 +116,12 @@ public class MyEventsFragment extends Fragment implements MyOnClickListener {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        owner_id = Integer.parseInt(getArguments().getStringArrayList("VIP").get(1));
         token = getArguments().getStringArrayList("VIP").get(0);
-        adapter = new ListAdapterMyEvents(getContext(), myEventArrayList);
+        owner_id = Integer.parseInt(getArguments().getStringArrayList("VIP").get(1));
+
+        adapter = new ListAdapter(getContext(), myEventArrayList);
         recyclerView.setAdapter(adapter);
-        adapter.setListenerMyEvents(this);
+        adapter.setListener(this);
 
         setButton(v);
         getEventsListAPI();
@@ -155,5 +150,4 @@ public class MyEventsFragment extends Fragment implements MyOnClickListener {
         fragmentTransaction.commit();
 
     }
-
 }
