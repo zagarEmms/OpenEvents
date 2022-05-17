@@ -40,10 +40,11 @@
             android:layout_width="350dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
-            android:background="#C6D6EA"
+            android:background="#92C7D9ED"
             android:hint="@string/create_title"
             android:inputType="text"
-            android:padding="15dp" />
+            android:padding="15dp"
+            android:layout_marginTop="15dp"/>
 
     </FrameLayout>
 
@@ -61,7 +62,7 @@
             android:layout_width="350dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
-            android:background="#C6D6EA"
+            android:background="#92C7D9ED"
             android:hint="@string/create_description"
             android:inputType="text"
             android:padding="15dp" />
@@ -70,18 +71,19 @@
 
     <FrameLayout
         android:id="@+id/frameLayout4"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/frameLayout3">
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout3"
+        android:background="#92C7D9ED">
 
         <Spinner
             android:id="@+id/createCategory"
             android:layout_width="350dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
-            android:background="@android:drawable/btn_dropdown"
+            android:popupBackground="@android:drawable/btn_dropdown"
             android:spinnerMode="dropdown"
             android:entries="@array/dropCategories"/>
 
@@ -94,7 +96,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/frameLayout4"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp">
 
         <EditText
             android:id="@+id/createStartDate"
@@ -163,7 +166,7 @@
             android:layout_width="350dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
-            android:background="#C6D6EA"
+            android:background="#92C7D9ED"
             android:hint="@string/create_location"
             android:inputType="text"
             android:padding="15dp" />

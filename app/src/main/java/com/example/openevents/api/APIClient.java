@@ -82,4 +82,9 @@ public class APIClient {
     public void showEventsScore(String token, Callback<ArrayList<Event>> callback) {
         this.service.showEventsScore(token).enqueue(callback);
     }
+
+    public void editEvent(String token, EventCreation event, int id, Callback<Event> callback) {
+        this.service.editEvent(token, event, id).enqueue(callback);
+    }
+
 }

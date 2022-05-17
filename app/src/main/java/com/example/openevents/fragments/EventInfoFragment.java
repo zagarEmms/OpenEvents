@@ -43,6 +43,7 @@ public class EventInfoFragment extends Fragment {
     private TextView endDate;
     private TextView participants;
     private TextView type;
+    private ArrayList<String> eventInfo = new ArrayList<>();
 
     public EventInfoFragment() {
         //Required empty public constructor
@@ -51,6 +52,7 @@ public class EventInfoFragment extends Fragment {
     public void editEvent () {
 
         Intent i = new Intent(getActivity(), Edit_Event_Activity.class);
+        i.putStringArrayListExtra("EDIT_INFO", eventInfo);
         startActivity(i);
         ((Activity) getActivity()).overridePendingTransition(0, 0);
 
@@ -88,6 +90,7 @@ public class EventInfoFragment extends Fragment {
     }
 
     private void fillAPIInfo(Response<ArrayList<Event>> response) {
+
         name.setText(response.body().get(0).getName());
         description.setText(response.body().get(0).getDescription());
         startDate.setText(response.body().get(0).getEventStart_date());
@@ -95,6 +98,16 @@ public class EventInfoFragment extends Fragment {
         participants.setText(String.valueOf(response.body().get(0).getN_participators()));
         location.setText(response.body().get(0).getLocation());
         type.setText(response.body().get(0).getType());
+
+        eventInfo.add(String.valueOf(id));
+        eventInfo.add(response.body().get(0).getName());
+        eventInfo.add(response.body().get(0).getDescription());
+        eventInfo.add(response.body().get(0).getEventStart_date());
+        eventInfo.add(response.body().get(0).getEventEnd_date());
+        eventInfo.add(Integer.toString(response.body().get(0).getN_participators()));
+        eventInfo.add(response.body().get(0).getLocation());
+        eventInfo.add(response.body().get(0).getType());
+
     }
 
     private void joinEventApi () {

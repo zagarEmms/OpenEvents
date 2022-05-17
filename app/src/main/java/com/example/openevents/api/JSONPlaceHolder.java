@@ -61,7 +61,11 @@ public interface JSONPlaceHolder {
     @POST("users/{id}/assistances")
     Call<UserEventRequest> joinEvent(@Header("Authorization") String token, @Path("id") int id);
 
-    @PUT("/assistances/{user_id}/{event_id}/")
+    @PUT("/assistances/{user_id}/{event_id}/")  //currently in development
     Call<ArrayList<User>> postComment (@Header("Authorization") String token, @Body Assistance assistance, @Path("user_id") int user_id, @Path("event_id") int event_id);
+
+    @PUT("/events/{id}")
+    Call<Event> editEvent (@Header("Authorization") String token, @Body EventCreation event, @Path("id") int id);
+
 
 }
