@@ -113,6 +113,8 @@ public class MyEventsFragment extends Fragment implements MyOnClickListener {
         View v = inflater.inflate(R.layout.fragment_my_events, container, false);
         myEventArrayList.clear();
 
+        myEventArrayList.clear();
+
         recyclerView = v.findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

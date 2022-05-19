@@ -1,6 +1,7 @@
 package com.example.openevents.recyclerView;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,6 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.openevents.R;
 import com.example.openevents.business.Event;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.Picasso;
 
 import java.io.InputStream;
 import java.net.URL;
@@ -44,10 +47,26 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ListAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.eventName.setText(eventsArrayList.get(position).getName());
         holder.startDate.setText(eventsArrayList.get(position).getEventStart_date());
         holder.location.setText(eventsArrayList.get(position).getLocation());
+        holder.eventImage.setImageResource(R.drawable.santamonica_photo);
+
+        Log.i("image", ""+ eventsArrayList.get(position).getImage());
+        Picasso.get()
+                .load(eventsArrayList.get(position).getImage())
+                .into(holder.eventImage, new Callback() {
+                    @Override
+                    public void onSuccess() {
+
+                    }
+
+                    @Override
+                    public void onError(Exception e) {
+                        holder.eventImage.setImageResource(R.drawable.santamonica_photo);
+                    }
+                });
     }
 
     @Override
@@ -60,6 +79,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         private TextView eventName;
         private TextView startDate;
         private TextView location;
+        private ImageView eventImage;
 
         private LinearLayout linearLayout;
         private MyOnClickListener listener;
@@ -73,6 +93,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
             eventName = itemView.findViewById(R.id.itemName);
             startDate = itemView.findViewById(R.id.start_date);
             location = itemView.findViewById(R.id.location);
+            eventImage = itemView.findViewById(R.id.eventImg);
 
             linearLayout = itemView.findViewById(R.id.layout_id);
 

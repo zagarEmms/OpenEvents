@@ -31,7 +31,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class PersonFragment extends Fragment implements MyOnClickListener, View.OnClickListener {
+public class PersonFragment extends Fragment implements MyOnClickListener {
 
     private Bundle bundleFriend = new Bundle();
     private static ArrayList<String> bundle = new ArrayList<String>();
@@ -43,6 +43,7 @@ public class PersonFragment extends Fragment implements MyOnClickListener, View.
     private TextView score;
     private TextView comments;
     private TextView commentersAvg;
+    private Button follow;
 
     private RecyclerView recyclerView;
     private ListAdapterPeople adapterFriends;
@@ -85,18 +86,13 @@ public class PersonFragment extends Fragment implements MyOnClickListener, View.
             @Override
             public void onResponse(Call<ArrayList<User>> call, Response<ArrayList<User>> response) {
 
-                if (response.body() == null) {
+                if (response.body().size() == 0) {
                     Toast toast =
                             Toast.makeText(getContext(), "Not friends found", Toast.LENGTH_LONG);
-                    toast.setGravity(Gravity.TOP, 0,0);
+                    toast.setGravity(Gravity.BOTTOM, 0,600);
                     toast.show();
 
                 } else {
-                    Toast toast =
-                            Toast.makeText(getContext(), "FRIENDS MAY APPEAR HERE", Toast.LENGTH_LONG);
-                    toast.setGravity(Gravity.BOTTOM, 0,10);
-                    toast.show();
-
                     friendsArrayList.addAll(response.body());
                     Log.i("GET","PEOPLE WENT WELL!" + response.body());
 
@@ -165,6 +161,15 @@ public class PersonFragment extends Fragment implements MyOnClickListener, View.
         });
     }
 
+    public void setButton() {
+        follow.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View view) {
+                  addFriendApi();
+              }
+          }
+        );
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -195,7 +200,7 @@ public class PersonFragment extends Fragment implements MyOnClickListener, View.
         getInfoScore();
         getFriends();
 
-        onClick(v);
+        setButton();
 
 
         return v;
@@ -208,6 +213,7 @@ public class PersonFragment extends Fragment implements MyOnClickListener, View.
         score = v.findViewById(R.id.score);
         comments = v.findViewById(R.id.num_comments);
         commentersAvg = v.findViewById(R.id.comeneters);
+        follow = v.findViewById(R.id.follow);
     }
 
     @Override
@@ -227,21 +233,8 @@ public class PersonFragment extends Fragment implements MyOnClickListener, View.
 
         Fragment currentFragment = getActivity().getSupportFragmentManager().findFragmentById(R.id.flFragment);
         FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.detach(currentFragment);
         fragmentTransaction.attach(currentFragment);
         fragmentTransaction.commit();
 
-    }
-
-    @Override
-    public void onClick(View view) {
-        Button follow = view.findViewById(R.id.follow);
-        follow.setOnClickListener(new View.OnClickListener() {
-                  @Override
-                  public void onClick(View view) {
-                      addFriendApi();
-                  }
-              }
-        );
     }
 }

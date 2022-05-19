@@ -27,6 +27,7 @@ import com.example.openevents.business.Assistance;
 import com.example.openevents.business.DeleteEvent;
 import com.example.openevents.business.Event;
 import com.example.openevents.business.UserEventRequest;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -49,6 +50,7 @@ public class EventInfoFragment extends Fragment {
     private TextView endDate;
     private TextView participants;
     private TextView type;
+    private ImageView imageView;
     private ArrayList<String> eventInfo = new ArrayList<>();
     private ArrayList<String> vipArrayList = new ArrayList<>();
     private Button deleteButton;
@@ -140,6 +142,7 @@ public class EventInfoFragment extends Fragment {
 
                 } else {
                     Log.i("GET","EVENT WENT WELL!" + response.body());
+                    Log.i("GET","ID" + response.body().get(0).getId());
                     fillAPIInfo(response);
                     event_owner_id = response.body().get(0).getOwner_id();
                     setButton(v);
@@ -167,6 +170,20 @@ public class EventInfoFragment extends Fragment {
         location.setText(response.body().get(0).getLocation());
         type.setText(response.body().get(0).getType());
 
+        Picasso.get()
+                .load(response.body().get(0).getImage())
+                .into(imageView, new com.squareup.picasso.Callback() {
+                    @Override
+                    public void onSuccess() {
+
+                    }
+
+                    @Override
+                    public void onError(Exception e) {
+                        imageView.setImageResource(R.drawable.santamonica_photo);
+                    }
+                });
+
         eventInfo.add(String.valueOf(id));
         eventInfo.add(response.body().get(0).getName());
         eventInfo.add(response.body().get(0).getDescription());
@@ -188,14 +205,14 @@ public class EventInfoFragment extends Fragment {
                 if (response.body() == null) {
                     Toast toast =
                             Toast.makeText(getContext(), "NOT EVENT FOUND", Toast.LENGTH_LONG);
-                    toast.setGravity(Gravity.TOP, 0,0);
+                    toast.setGravity(Gravity.TOP, 0,300);
                     toast.show();
 
                 } else {
                     Log.i("GET","JOIN WENT WELL!" + response.body());
                     Toast toast =
                             Toast.makeText(getContext(), "YOU HAVE JOINED THE EVENT :)", Toast.LENGTH_LONG);
-                    toast.setGravity(Gravity.BOTTOM, 0,10);
+                    toast.setGravity(Gravity.BOTTOM, 0,300);
                     toast.show();
                 }
             }
@@ -332,6 +349,7 @@ public class EventInfoFragment extends Fragment {
         participants = v.findViewById(R.id.participants);
         location = v.findViewById(R.id.location);
         type = v.findViewById(R.id.tag);
+        imageView = v.findViewById(R.id.itemImg);
         fillTempInfo();
     }
 }

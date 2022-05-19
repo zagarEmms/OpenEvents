@@ -77,7 +77,7 @@ public interface JSONPlaceHolder {
     Call<ArrayList<User>> getProfileInfo(@Header("Authorization") String token, @Path("id") int id);
 
     @GET("events/search/")
-    Call<ArrayList<Event>> showEventsSearched(@Header("Authorization") String token, @Query("location") String location, @Query("keyword") String keyword, @Query("location") String date);
+    Call<ArrayList<Event>> showEventsSearched(@Header("Authorization") String token, @Query("location") String location, @Query("keyword") String keyword, @Query("date") String date);
 
     @GET("assistances/{user_id}/{event_id}")
     Call<Assistance> isUserJoined(@Header("Authorization") String token, @Path("user_id") int user_id, @Path("event_id") int event_id);

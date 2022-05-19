@@ -54,9 +54,9 @@ public class SearchEventFragment extends Fragment implements MyOnClickListener {
     }
 
     private void  checkInputs() {
-        keyword = null;
-        location = null;
-        date = null;
+        keyword = "";
+        location = "";
+        date = "";
 
         if (!keywordSearch.getText().toString().equals("")) {
             keyword = keywordSearch.getText().toString();
