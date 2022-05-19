@@ -50,6 +50,8 @@
     <string name="searchEvent_date">Start date</string>
     <string name="title_searchEvent">Search Events</string>
     <string name="serach_event_hint">Search by name, location or date</string>
+    <string name="log_out">LOG OUT</string>
+    <string name="edit_profile">edit profile</string>
 
     <string-array name="dropCategories">
         <item>Categories</item>

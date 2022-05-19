@@ -78,4 +78,6 @@ public interface JSONPlaceHolder {
     @GET("events/search/")
     Call<ArrayList<Event>> showEventsSearched(@Header("Authorization") String token, @Query("location") String location, @Query("keyword") String keyword, @Query("location") String date);
 
+    @GET("friends/")
+    Call<ArrayList<User>> showMyFriends(@Header("Authorization") String token);
 }

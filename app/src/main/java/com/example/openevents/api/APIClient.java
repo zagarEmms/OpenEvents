@@ -100,4 +100,8 @@ public class APIClient {
         this.service.showEventsSearched(token, keyword, location, date).enqueue(callback);
     }
 
+    public void showMyFriends(String token, Callback<ArrayList<User>> callback) {
+        this.service.showMyFriends(token).enqueue(callback);
+    }
+
 }
