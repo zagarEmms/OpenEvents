@@ -51,11 +51,13 @@
     <string name="title_searchEvent">Search Events</string>
     <string name="serach_event_hint">Search by name, location or date</string>
     <string name="log_out">LOG OUT</string>
-    <string name="edit_profile">edit profile</string>
 
+    <string name="edit_profile">edit profile</string>
     <string name="edit_profile_title">Edit Profile ⚙️</string>
     <string name="edit_profile_image">Image (min length 8)</string>
     <string name="edit_profile_button">EDIT PROFILE</string>
+    <string name="edit_profile_text">(fill password for confirmation or change it)</string>
+
 
     <string-array name="dropCategories">
         <item>Categories</item>

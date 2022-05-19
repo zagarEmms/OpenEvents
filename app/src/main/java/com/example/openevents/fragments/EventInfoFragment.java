@@ -174,6 +174,7 @@ public class EventInfoFragment extends Fragment {
         eventInfo.add(response.body().get(0).getEventEnd_date());
         eventInfo.add(Integer.toString(response.body().get(0).getN_participators()));
         eventInfo.add(response.body().get(0).getLocation());
+        eventInfo.add(response.body().get(0).getImage());
         eventInfo.add(response.body().get(0).getType());
 
     }

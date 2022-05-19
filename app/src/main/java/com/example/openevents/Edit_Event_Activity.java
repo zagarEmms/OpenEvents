@@ -38,7 +38,7 @@ public class Edit_Event_Activity extends AppCompatActivity implements AdapterVie
     private EditText endDate;
     private EditText endTime;
     private EditText location;
-    private String image;
+    private EditText image;
     private int n_participators;
     private String eventStart_date;
     private String eventEnd_date;
@@ -50,6 +50,7 @@ public class Edit_Event_Activity extends AppCompatActivity implements AdapterVie
     private String descriptionOk;
     private String locationOk;
     private String categoryOk;
+    private String imageOk;
 
     public void changeActivity () {
         onBackPressed();
@@ -71,7 +72,7 @@ public class Edit_Event_Activity extends AppCompatActivity implements AdapterVie
         endDate = (EditText) findViewById(R.id.editEndDate);
         endTime =  (EditText) findViewById(R.id.editEndTime);
         location = (EditText) findViewById(R.id.editLocation);
-        image = "imageTest";
+        image = (EditText) findViewById(R.id.editImage);
 
         id = Integer.parseInt(infoEvent.get(0));
         title.setHint(infoEvent.get(1));
@@ -83,7 +84,9 @@ public class Edit_Event_Activity extends AppCompatActivity implements AdapterVie
         n_participators = Integer.parseInt(infoEvent.get(5));
         location.setHint(infoEvent.get(6));
         locationOk = infoEvent.get(6);
-        categoryOk = infoEvent.get(7);
+        imageOk = infoEvent.get(7);
+        image.setHint(infoEvent.get(7));
+        categoryOk = infoEvent.get(8);
 
     }
 
@@ -99,6 +102,10 @@ public class Edit_Event_Activity extends AppCompatActivity implements AdapterVie
 
         if (!description.getText().toString().equals("")) {
             descriptionOk = description.getText().toString();
+        }
+
+        if (!image.getText().toString().equals("")) {
+            imageOk = image.getText().toString();
         }
 
         if (!category.equals("Categories")) {
@@ -117,7 +124,7 @@ public class Edit_Event_Activity extends AppCompatActivity implements AdapterVie
     public void connectApi () {
 
         verifyChangedInfo();
-        EventCreation event = new EventCreation(titleOk, image, locationOk, descriptionOk, eventStart_date, eventEnd_date, n_participators, categoryOk);
+        EventCreation event = new EventCreation(titleOk, imageOk, locationOk, descriptionOk, eventStart_date, eventEnd_date, n_participators, categoryOk);
 
         APIClient.getInstance().editEvent(getToken(), event, id, new Callback<Event>() {
             @Override
