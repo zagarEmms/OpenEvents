@@ -53,6 +53,10 @@
     <string name="log_out">LOG OUT</string>
     <string name="edit_profile">edit profile</string>
 
+    <string name="edit_profile_title">Edit Profile ⚙️</string>
+    <string name="edit_profile_image">Image (min length 8)</string>
+    <string name="edit_profile_button">EDIT PROFILE</string>
+
     <string-array name="dropCategories">
         <item>Categories</item>
         <item>Education</item>

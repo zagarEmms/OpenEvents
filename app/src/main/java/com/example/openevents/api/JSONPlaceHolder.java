@@ -7,6 +7,7 @@ import com.example.openevents.business.EventCreation;
 import com.example.openevents.business.Statistic;
 import com.example.openevents.business.Token;
 import com.example.openevents.business.User;
+import com.example.openevents.business.UserCreation;
 import com.example.openevents.business.UserEventRequest;
 import com.google.gson.JsonObject;
 
@@ -28,7 +29,7 @@ import retrofit2.http.Query;
 public interface JSONPlaceHolder {
 
     @POST("users/")
-    Call<User> signUp(@Body User user);
+    Call<User> signUp(@Body UserCreation user);
 
     @POST("users/login/")
     Call<Token> logIn(@Body User user);
@@ -78,6 +79,14 @@ public interface JSONPlaceHolder {
     @GET("events/search/")
     Call<ArrayList<Event>> showEventsSearched(@Header("Authorization") String token, @Query("location") String location, @Query("keyword") String keyword, @Query("location") String date);
 
+    @GET("assistances/{user_id}/{event_id}")
+    Call<Assistance> isUserJoined(@Header("Authorization") String token, @Path("user_id") int user_id, @Path("event_id") int event_id);
+
     @GET("friends/")
     Call<ArrayList<User>> showMyFriends(@Header("Authorization") String token);
+
+    @PUT("users")
+    Call<ArrayList<User>> editProfile(@Header("Authorization") String token, @Body UserCreation user);
+
+
 }

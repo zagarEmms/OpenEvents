@@ -41,7 +41,7 @@
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:background="#97AECA"
-            android:padding="15dp"
+            android:padding="10dp"
             android:textAlignment="center"
             android:text="@string/comment_event"
             android:textSize="20sp"/>

@@ -18,10 +18,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.openevents.Comment_Rate_Activity;
 import com.example.openevents.Create_Event_Activity;
 import com.example.openevents.Edit_Event_Activity;
 import com.example.openevents.R;
 import com.example.openevents.api.APIClient;
+import com.example.openevents.business.Assistance;
 import com.example.openevents.business.DeleteEvent;
 import com.example.openevents.business.Event;
 import com.example.openevents.business.UserEventRequest;
@@ -81,6 +83,15 @@ public class EventInfoFragment extends Fragment {
 
     }
 
+    public void commentEvent () {
+
+        Intent i = new Intent(getActivity(), Comment_Rate_Activity.class);
+        i.putExtra("COMMENT_INFO", eventInfo.get(1));
+        startActivity(i);
+        ((Activity) getActivity()).overridePendingTransition(0, 0);
+
+    }
+
     public void deleteApi () {
 
         APIClient.getInstance().deleteEvent(token, id, new Callback<DeleteEvent>() {
@@ -115,11 +126,6 @@ public class EventInfoFragment extends Fragment {
         });
     }
 
-    public void setDeleteButton (View v) {
-
-    }
-
-
     public void getInfoAPI(View v) {
 
         APIClient.getInstance().showEventInfo(token, id, new Callback<ArrayList<Event>>() {
@@ -128,7 +134,7 @@ public class EventInfoFragment extends Fragment {
 
                 if (response.body() == null) {
                     Toast toast =
-                            Toast.makeText(getContext(), "Not event found", Toast.LENGTH_LONG);
+                            Toast.makeText(getContext(), "NOT EVENT FOUND", Toast.LENGTH_LONG);
                     toast.setGravity(Gravity.TOP, 0,0);
                     toast.show();
 
@@ -181,7 +187,7 @@ public class EventInfoFragment extends Fragment {
                 if (response.body() == null) {
                     Log.i("GET","JOIN WENT WELL!" + response.body());
                     Toast toast =
-                            Toast.makeText(getContext(), "Not event found", Toast.LENGTH_LONG);
+                            Toast.makeText(getContext(), "NOT EVENT FOUND", Toast.LENGTH_LONG);
                     toast.setGravity(Gravity.TOP, 0,0);
                     toast.show();
 
@@ -196,6 +202,56 @@ public class EventInfoFragment extends Fragment {
 
             @Override
             public void onFailure(Call<UserEventRequest> call, Throwable t) {
+                Log.i("GET","JOIN KO!");
+                Toast toast =
+                        Toast.makeText(getContext(), "CONNECTION ERROR", Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.CENTER_VERTICAL, 0,0);
+                toast.show();
+            }
+        });
+    }
+
+    public void setCommentButton (boolean isJoined, View v) {
+
+        Button join = v.findViewById(R.id.join);
+
+        if(isJoined) {
+
+            join.setText(getString(R.string.comment_comment));
+            join.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        commentEvent();
+                    }
+                }
+            );
+
+        } else {
+
+            join.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        joinEventApi();
+                    }
+                }
+            );
+        }
+    }
+
+    public void isUserJoined (View v) {
+        APIClient.getInstance().isUserJoined(token, owner_id, id, new Callback<Assistance>() {
+            @Override
+            public void onResponse(Call<Assistance> call, Response<Assistance> response) {
+
+                if (response.body().getEvent_id() == 0) {
+                    setCommentButton(false, v);
+                } else {
+                    setCommentButton(true, v);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Assistance> call, Throwable t) {
                 Log.i("GET","JOIN KO!");
                 Toast toast =
                         Toast.makeText(getContext(), "CONNECTION ERROR", Toast.LENGTH_LONG);
@@ -227,21 +283,12 @@ public class EventInfoFragment extends Fragment {
                     @Override
                     public void onClick(View view) {
                         editEvent();
-                        setDeleteButton(view);
                     }
                 }
             );
 
         } else {
-
-            join.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        joinEventApi();
-                    }
-                }
-            );
-
+            isUserJoined(view);
         }
     }
 

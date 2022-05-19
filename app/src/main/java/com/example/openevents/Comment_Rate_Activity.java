@@ -31,10 +31,7 @@ public class Comment_Rate_Activity extends AppCompatActivity {
     private Button submit;
 
     public void changeActivity () {
-        Intent intent = new Intent();
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
-        finish();
+        onBackPressed();
     }
 
     private String getToken() {
@@ -51,14 +48,14 @@ public class Comment_Rate_Activity extends AppCompatActivity {
 
     }
 
-    public void connectApi () {
+    public void connectApi () {  //currently in development
 
         String token = getToken();
 
         comment = (EditText) findViewById(R.id.comment);
         rating = (EditText) findViewById(R.id.rating);
 
-        Assistance assistance = new Assistance(Integer.parseInt(rating.getText().toString()), comment.getText().toString());
+        //Assistance assistance = new Assistance(Integer.parseInt(rating.getText().toString()), comment.getText().toString());
 
     }
 
@@ -83,7 +80,7 @@ public class Comment_Rate_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comment_rate);
 
-        String title = savedInstanceState.getString("TITLE");
+        String title = getIntent().getStringExtra("COMMENT_INFO");
 
         setButton();
         setTitle(title);

@@ -7,6 +7,7 @@ import com.example.openevents.business.EventCreation;
 import com.example.openevents.business.Statistic;
 import com.example.openevents.business.Token;
 import com.example.openevents.business.User;
+import com.example.openevents.business.UserCreation;
 import com.example.openevents.business.UserEventRequest;
 
 import java.util.ArrayList;
@@ -36,7 +37,7 @@ public class APIClient {
         this.service = this.retrofit.create(JSONPlaceHolder.class);
     }
 
-    public void signUp (User user, Callback<User> callback) {
+    public void signUp (UserCreation user, Callback<User> callback) {
         this.service.signUp(user).enqueue(callback);
     }
 
@@ -102,6 +103,14 @@ public class APIClient {
 
     public void showMyFriends(String token, Callback<ArrayList<User>> callback) {
         this.service.showMyFriends(token).enqueue(callback);
+    }
+
+    public void isUserJoined(String token, int user_id, int event_id, Callback<Assistance> callback) {
+        this.service.isUserJoined(token, user_id, event_id).enqueue(callback);
+    }
+
+    public void editProfile(String token, UserCreation user, Callback<ArrayList<User>> callback) {
+        this.service.editProfile(token, user).enqueue(callback);
     }
 
 }

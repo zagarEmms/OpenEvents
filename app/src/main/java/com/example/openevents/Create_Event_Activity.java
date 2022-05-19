@@ -53,10 +53,7 @@ public class Create_Event_Activity extends AppCompatActivity implements AdapterV
     private Spinner spinner;
 
     public void changeActivity () {
-        Intent intent = new Intent();
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
-        finish();
+        onBackPressed();
     }
 
     private String getToken() {

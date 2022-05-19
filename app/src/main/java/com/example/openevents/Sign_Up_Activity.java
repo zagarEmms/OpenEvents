@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.openevents.api.APIClient;
 import com.example.openevents.business.User;
+import com.example.openevents.business.UserCreation;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
@@ -47,7 +48,7 @@ public class Sign_Up_Activity extends AppCompatActivity {
         Log.i("INFO","name: " + name.getText().toString());
         Log.i("INFO","password: " + password.getText().toString());
 
-        User user = new User(name.getText().toString(), last.getText().toString(), email.getText().toString(), password.getText().toString(), name.getText().toString());
+        UserCreation user = new UserCreation(name.getText().toString(), last.getText().toString(), email.getText().toString(), password.getText().toString(), name.getText().toString());
 
         if (password.getText().toString().equals(password2.getText().toString())) {
 

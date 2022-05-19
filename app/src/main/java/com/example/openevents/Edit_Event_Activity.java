@@ -52,16 +52,12 @@ public class Edit_Event_Activity extends AppCompatActivity implements AdapterVie
     private String categoryOk;
 
     public void changeActivity () {
-        Intent intent = new Intent();
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
-        finish();
+        onBackPressed();
     }
 
     private String getToken() {
 
         SharedPreferences prefs = this.getSharedPreferences("TOKEN", Context.MODE_PRIVATE);
-        Log.i("TOKEN", "Bearer " + prefs.getString("TOKEN",""));
         return "Bearer " + prefs.getString("TOKEN","");
 
     }
