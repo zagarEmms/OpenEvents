@@ -1,6 +1,8 @@
 package com.example.openevents.business;
 
-public class UserCreation {
+import java.io.Serializable;
+
+public class UserCreation implements Serializable {
 
     private String name;
     private String last_name;
