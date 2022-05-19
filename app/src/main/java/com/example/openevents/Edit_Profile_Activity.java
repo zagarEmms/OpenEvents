@@ -91,7 +91,7 @@ public class Edit_Profile_Activity extends AppCompatActivity {
 
         verifyChangedInfo();
 
-        if (!password.getText().toString().equals("")) {
+        if (password.getText().toString().equals("")) {
 
             Toast toast1 =
                     Toast.makeText(getApplicationContext(),

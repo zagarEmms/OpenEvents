@@ -1,7 +1,9 @@
 package com.example.openevents.fragments;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -19,7 +21,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.openevents.Create_Event_Activity;
+import com.example.openevents.Edit_Profile_Activity;
+import com.example.openevents.MainActivity;
 import com.example.openevents.R;
 import com.example.openevents.api.APIClient;
 import com.example.openevents.business.Statistic;
@@ -45,7 +48,8 @@ public class ProfileFragment extends Fragment implements MyOnClickListener {
     private TextView comments;
     private TextView commentersAvg;
 
-    private Button edit_profile;
+    private Button editProfile;
+    private Button logOut;
 
     private RecyclerView recyclerView;
     private ListAdapterPeople adapterFriends;
@@ -59,7 +63,7 @@ public class ProfileFragment extends Fragment implements MyOnClickListener {
         // Required empty public constructor
     }
 
-    private void changeActivity() {
+   private void changeActivity() {
         Intent i = new Intent(getActivity(), Edit_Profile_Activity.class);
         i.putStringArrayListExtra("PROFILE_INFO", profileInfo);
         startActivity(i);
@@ -90,7 +94,7 @@ public class ProfileFragment extends Fragment implements MyOnClickListener {
                 Log.i("GET","FRIENDS LIST KO!");
                 Toast toast =
                         Toast.makeText(getContext(), "CONNECTION ERROR", Toast.LENGTH_LONG);
-                toast.setGravity(Gravity.CENTER_VERTICAL, 0,0);
+                toast.setGravity(Gravity.BOTTOM, 0,0);
                 toast.show();
             }
         });
@@ -160,7 +164,7 @@ public class ProfileFragment extends Fragment implements MyOnClickListener {
                 } else {
                     Toast toast =
                             Toast.makeText(getContext(), "YOUR FRIENDS MAY APPEAR HERE", Toast.LENGTH_LONG);
-                    toast.setGravity(Gravity.TOP, 0,1000);
+                    toast.setGravity(Gravity.TOP, 0,900);
                     toast.show();
 
                     friendsArrayList.addAll(response.body());
@@ -181,12 +185,22 @@ public class ProfileFragment extends Fragment implements MyOnClickListener {
     }
 
     private void setButtons() {
-        edit_profile.setOnClickListener(new View.OnClickListener() {
+        editProfile.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     changeActivity();
                 }
             }
+        );
+
+        logOut.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View view) {
+                  getContext().getSharedPreferences("TOKEN", Context.MODE_PRIVATE).edit().remove("TOKEN").apply();
+                  Intent i = new Intent(getActivity(), MainActivity.class);
+                  startActivity(i);
+              }
+          }
         );
 
     }
@@ -228,7 +242,8 @@ public class ProfileFragment extends Fragment implements MyOnClickListener {
         score = v.findViewById(R.id.score);
         comments = v.findViewById(R.id.num_comments);
         commentersAvg = v.findViewById(R.id.comeneters);
-        edit_profile = v.findViewById(R.id.edit_profile);
+        editProfile = v.findViewById(R.id.edit_profile);
+        logOut = v.findViewById(R.id.log_out);
     }
 
     @Override

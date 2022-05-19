@@ -35,7 +35,6 @@ public class Log_In_Activity extends AppCompatActivity {
     }
 
     private void changeActivityHome() {
-        //Intent intent = new Intent(this, Create_Event_Activity.class);
         Intent intent = new Intent(Log_In_Activity.this, Nav_Bar_Activity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
