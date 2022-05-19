@@ -24,7 +24,7 @@
     <string name="title_people">People 🤗</string>
     <string name="title_search">Search Friends 🧐</string>
     <string name="search_text">Search for name, last name or email</string>
-    <string name="search_results">0 matching result found:</string>
+    <string name="search_results">matching results found:</string>
     <string name="title_my_events">My Events 🥳</string>
     <string name="title_comment">Comment and Rate 🤭</string>
     <string name="comment_butt">SUBMIT</string>

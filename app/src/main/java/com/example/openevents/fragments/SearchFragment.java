@@ -51,7 +51,6 @@ public class SearchFragment extends Fragment implements MyOnClickListener {
     public void getPeopleListAPI() {
 
         APIClient.getInstance().showPeopleSearch(token, inputSearch.getText().toString(), new Callback<ArrayList<User>>() {
-            @SuppressLint("SetTextI18n")
             @Override
             public void onResponse(Call<ArrayList<User>> call, Response<ArrayList<User>> response) {
 
@@ -69,7 +68,9 @@ public class SearchFragment extends Fragment implements MyOnClickListener {
                     Log.i("GET","PEOPLE WENT WELL!" + response.body());
                     peopleArrayList.addAll(response.body());
 
-                    resultsText.setText(peopleArrayList.size() + " matching result found:");
+                    String string = peopleArrayList.size() + " " + getString(R.string.search_results);
+                    resultsText.setText(string);
+
                     adapter.notifyDataSetChanged();
 
                 }
@@ -91,6 +92,9 @@ public class SearchFragment extends Fragment implements MyOnClickListener {
         searchIcon = (ImageView) v.findViewById(R.id.imageSearch);
         inputSearch = (EditText) v.findViewById(R.id.editTextSearch);
         resultsText = (TextView) v.findViewById(R.id.resultsText);
+
+        String string = peopleArrayList.size() + " " + getString(R.string.search_results);
+        resultsText.setText(string);
 
         searchIcon.setOnClickListener(new View.OnClickListener() {
                @Override
