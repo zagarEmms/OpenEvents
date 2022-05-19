@@ -42,9 +42,9 @@ public class SearchEventFragment extends Fragment implements MyOnClickListener {
     private EditText locationSearch;
     private EditText dateSearch;
 
-    private String keyword = null;
-    private String location = null;
-    private String date = null;
+    private String keyword;
+    private String location;
+    private String date;
     private String dateFinal;
 
     private ImageButton searchIcon;
@@ -54,6 +54,9 @@ public class SearchEventFragment extends Fragment implements MyOnClickListener {
     }
 
     private void  checkInputs() {
+        keyword = null;
+        location = null;
+        date = null;
 
         if (!keywordSearch.getText().toString().equals("")) {
             keyword = keywordSearch.getText().toString();
@@ -66,11 +69,18 @@ public class SearchEventFragment extends Fragment implements MyOnClickListener {
         if (!dateSearch.getText().toString().equals("")) {
             date = dateSearch.getText().toString();
 
-            String[] date_parts = date.split("/");
-            String part1 = date_parts[0];
-            String part2 = date_parts[1];
-            String part3 = date_parts[2];
-            dateFinal = part3 + "-" + part2 + "-" + part1;
+            try {
+                String[] date_parts = date.split("/");
+                String part1 = date_parts[0];
+                String part2 = date_parts[1];
+                String part3 = date_parts[2];
+                dateFinal = part3 + "-" + part2 + "-" + part1;
+            } catch (ArrayIndexOutOfBoundsException ae) {
+                Toast toast =
+                        Toast.makeText(getContext(), "INCORRECT DATE FORMAT", Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.TOP, 0,0);
+                toast.show();
+            }
 
             Log.i("date", ""+ dateFinal);
         }

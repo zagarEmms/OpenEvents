@@ -60,7 +60,7 @@ public interface JSONPlaceHolder {
     @POST("friends/{id}")
     Call<UserEventRequest> addFriendApi(@Header("Authorization") String token, @Path("id") int id);
 
-    @POST("users/{id}/assistances")
+    @POST("events/{id}/assistances")
     Call<UserEventRequest> joinEvent(@Header("Authorization") String token, @Path("id") int id);
 
     @PUT("assistances/{user_id}/{event_id}/")  //currently in development
