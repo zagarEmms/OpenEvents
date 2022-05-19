@@ -103,7 +103,7 @@ public class Edit_Profile_Activity extends AppCompatActivity {
         } else {
 
             String passwordOk = password.getText().toString();
-            UserCreation user = new UserCreation(nameOk, lastOk, emailOk, passwordOk, imageOk);
+            UserCreation user = new UserCreation(nameOk, lastOk, passwordOk, emailOk, imageOk);
 
             APIClient.getInstance().editProfile(getToken(), user, new Callback<ArrayList<User>>() {
                 @Override
