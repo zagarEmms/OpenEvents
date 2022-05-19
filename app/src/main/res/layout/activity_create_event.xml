@@ -182,24 +182,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/frameLayout7">
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/createImage"
+            android:layout_width="350dp"
             android:layout_height="50dp"
-            android:layout_gravity="start"
-            android:text="@string/create_image_upload"
-            android:textSize="20sp"
-            android:textColor="#6C6B6B"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="120dp"/>
-
-        <ImageView
-            android:id="@+id/imageUpload"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="end"
-            app:srcCompat="@drawable/ic_baseline_image_24"
-            android:layout_marginEnd="35dp"/>
+            android:layout_gravity="center"
+            android:background="#92C7D9ED"
+            android:hint="@string/create_image_upload"
+            android:inputType="text"
+            android:padding="15dp" />
 
     </FrameLayout>
 

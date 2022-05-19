@@ -46,7 +46,7 @@ public class Create_Event_Activity extends AppCompatActivity implements AdapterV
     private EditText endDate;
     private EditText endTime;
     private EditText location;
-    private String image;
+    private EditText image;
     private int n_participators;
     private String eventStart_date;
     private String eventEnd_date;
@@ -72,7 +72,7 @@ public class Create_Event_Activity extends AppCompatActivity implements AdapterV
         endDate = (EditText) findViewById(R.id.createEndDate);
         endTime =  (EditText) findViewById(R.id.createEndTime);
         location = (EditText) findViewById(R.id.createLocation);
-        image = "imageTest";
+        image = (EditText) findViewById(R.id.createImage);
         n_participators = 0;
 
         eventStart_date = startDate.getText().toString() + ", " + startTime.getText().toString();
@@ -81,7 +81,7 @@ public class Create_Event_Activity extends AppCompatActivity implements AdapterV
         Log.i("GET","START SELECTED: " + eventStart_date);
         Log.i("GET","END SELECTED: " + eventEnd_date);
 
-        EventCreation event = new EventCreation(title.getText().toString(), image, location.getText().toString(), description.getText().toString(), eventStart_date, eventEnd_date, n_participators, category);
+        EventCreation event = new EventCreation(title.getText().toString(), image.getText().toString(), location.getText().toString(), description.getText().toString(), eventStart_date, eventEnd_date, n_participators, category);
 
         APIClient.getInstance().createEvent(getToken(), event, new Callback<Event>() {
             @Override
@@ -113,26 +113,6 @@ public class Create_Event_Activity extends AppCompatActivity implements AdapterV
         });
     }
 
-    public void setImageUpload () {
-
-        imageUpload = (ImageView) findViewById(R.id.imageUpload);
-        imageUpload.setOnClickListener(new View.OnClickListener() {
-               @Override
-               public void onClick(View view) {
-
-                   //Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                   Toast toast1 =
-                           Toast.makeText(getApplicationContext(),
-                                   "IMAGE DISABLED", Toast.LENGTH_SHORT);
-
-                   toast1.setGravity(Gravity.TOP, 0, 0);
-                   toast1.show();
-
-               }
-           }
-        );
-    }
-
     public void setButton () {
 
         createButton = (Button) findViewById(R.id.createEventButton);
@@ -158,7 +138,6 @@ public class Create_Event_Activity extends AppCompatActivity implements AdapterV
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_event);
 
-        setImageUpload();
         setButton();
         setSpinner();
     }
