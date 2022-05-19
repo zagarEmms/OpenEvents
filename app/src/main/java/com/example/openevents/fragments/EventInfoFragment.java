@@ -186,7 +186,6 @@ public class EventInfoFragment extends Fragment {
             public void onResponse(Call<UserEventRequest> call, Response<UserEventRequest> response) {
 
                 if (response.body() == null) {
-                    Log.i("GET","JOIN WENT WELL!" + response.body());
                     Toast toast =
                             Toast.makeText(getContext(), "NOT EVENT FOUND", Toast.LENGTH_LONG);
                     toast.setGravity(Gravity.TOP, 0,0);
@@ -244,6 +243,11 @@ public class EventInfoFragment extends Fragment {
             @Override
             public void onResponse(Call<Assistance> call, Response<Assistance> response) {
 
+                Log.i("GET", "" + response.body().getEvent_id());
+                Log.i("GET", "" + response.body().getComentary());
+                Log.i("GET", "" + response.body().getPuntuation());
+                Log.i("GET", "" + response.body().getUser_id());
+
                 if (response.body().getEvent_id() == 0) {
                     setCommentButton(false, v);
                 } else {
@@ -253,7 +257,7 @@ public class EventInfoFragment extends Fragment {
 
             @Override
             public void onFailure(Call<Assistance> call, Throwable t) {
-                Log.i("GET","JOIN KO!");
+                Log.i("GET","JOIN KO!" + t.getMessage());
                 Toast toast =
                         Toast.makeText(getContext(), "CONNECTION ERROR", Toast.LENGTH_LONG);
                 toast.setGravity(Gravity.CENTER_VERTICAL, 0,0);

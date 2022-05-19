@@ -109,7 +109,7 @@ public class APIClient {
         this.service.isUserJoined(token, user_id, event_id).enqueue(callback);
     }
 
-    public void editProfile(String token, UserCreation user, Callback<ArrayList<User>> callback) {
+    public void editProfile(String token, UserCreation user, Callback<User> callback) {
         this.service.editProfile(token, user).enqueue(callback);
     }
 

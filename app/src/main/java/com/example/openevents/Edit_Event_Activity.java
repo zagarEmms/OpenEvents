@@ -72,7 +72,7 @@ public class Edit_Event_Activity extends AppCompatActivity implements AdapterVie
         endDate = (EditText) findViewById(R.id.editEndDate);
         endTime =  (EditText) findViewById(R.id.editEndTime);
         location = (EditText) findViewById(R.id.editLocation);
-        image = (EditText) findViewById(R.id.editImage);
+        image = (EditText) findViewById(R.id.editImageEvent);
 
         id = Integer.parseInt(infoEvent.get(0));
         title.setHint(infoEvent.get(1));

@@ -86,7 +86,7 @@ public interface JSONPlaceHolder {
     Call<ArrayList<User>> showMyFriends(@Header("Authorization") String token);
 
     @PUT("users")
-    Call<ArrayList<User>> editProfile(@Header("Authorization") String token, @Body UserCreation user);
+    Call<User> editProfile(@Header("Authorization") String token, @Body UserCreation user);
 
 
 }

@@ -7,26 +7,26 @@
     tools:context=".Create_Event_Activity">
 
 
-        <FrameLayout
-            android:id="@+id/frameLayout1"
-            android:layout_width="match_parent"
+    <FrameLayout
+        android:id="@+id/frameLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="#EFF4FA">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:background="#EFF4FA">
+            android:layout_gravity="center"
+            android:text="@string/edit_title"
+            android:textSize="30sp"
+            android:textColor="@color/black" />
 
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/edit_title"
-                android:textSize="30sp"
-                android:textColor="@color/black" />
-
-        </FrameLayout>
+    </FrameLayout>
 
     <ScrollView
         android:layout_width="wrap_content"
@@ -233,7 +233,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/frameLayout7">
 
                 <EditText
-                    android:id="@+id/editImage"
+                    android:id="@+id/editImageEvent"
                     android:layout_width="350dp"
                     android:layout_height="50dp"
                     android:layout_gravity="center"

@@ -105,9 +105,9 @@ public class Edit_Profile_Activity extends AppCompatActivity {
             String passwordOk = password.getText().toString();
             UserCreation user = new UserCreation(nameOk, lastOk, passwordOk, emailOk, imageOk);
 
-            APIClient.getInstance().editProfile(getToken(), user, new Callback<ArrayList<User>>() {
+            APIClient.getInstance().editProfile(getToken(), user, new Callback<User>() {
                 @Override
-                public void onResponse(Call<ArrayList<User>> call, Response<ArrayList<User>> response) {
+                public void onResponse(Call<User> call, Response<User> response) {
 
                     if (response.body() == null) {
                         Toast toast1 =
@@ -122,8 +122,8 @@ public class Edit_Profile_Activity extends AppCompatActivity {
                 }
 
                 @Override
-                public void onFailure(Call<ArrayList<User>> call, Throwable t) {
-                    Log.i("GET","KO!");
+                public void onFailure(Call<User> call, Throwable t) {
+                    Log.i("GET","KO!" + t.getMessage());
                     Toast toast2 =
                             Toast.makeText(getApplicationContext(),
                                     "CONNECTION ERROR!", Toast.LENGTH_SHORT);

@@ -1,6 +1,8 @@
 package com.example.openevents.business;
 
-public class Assistance {
+import java.io.Serializable;
+
+public class Assistance implements Serializable {
 
     private int user_id;
     private int event_id;
@@ -16,5 +18,17 @@ public class Assistance {
 
     public int getEvent_id() {
         return event_id;
+    }
+
+    public int getUser_id() {
+        return user_id;
+    }
+
+    public int getPuntuation() {
+        return puntuation;
+    }
+
+    public String getComentary() {
+        return comentary;
     }
 }
