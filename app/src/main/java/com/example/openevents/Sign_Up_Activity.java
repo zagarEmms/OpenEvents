@@ -45,10 +45,7 @@ public class Sign_Up_Activity extends AppCompatActivity {
 
     public void setSignUp () {
 
-        Log.i("INFO","name: " + name.getText().toString());
-        Log.i("INFO","password: " + password.getText().toString());
-
-        UserCreation user = new UserCreation(name.getText().toString(), last.getText().toString(), email.getText().toString(), password.getText().toString(), name.getText().toString());
+        UserCreation user = new UserCreation(name.getText().toString(), last.getText().toString(), password.getText().toString(), email.getText().toString(), "imageTest");
 
         if (password.getText().toString().equals(password2.getText().toString())) {
 
