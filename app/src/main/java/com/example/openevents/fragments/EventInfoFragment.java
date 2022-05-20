@@ -33,6 +33,7 @@ import java.util.ArrayList;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.http.DELETE;
 
 
 public class EventInfoFragment extends Fragment {
@@ -52,7 +53,6 @@ public class EventInfoFragment extends Fragment {
     private ImageView imageView;
     private ArrayList<String> eventInfo = new ArrayList<>();
     private ArrayList<String> vipArrayList = new ArrayList<>();
-    private Button deleteButton;
 
     public EventInfoFragment() {
         //Required empty public constructor
@@ -266,6 +266,8 @@ public class EventInfoFragment extends Fragment {
     public void setCommentButton (boolean isJoined, View v) {
 
         Button join = v.findViewById(R.id.join);
+        Button deleteButton = v.findViewById(R.id.delete);
+        deleteButton.setVisibility(View.GONE);
 
         if(isJoined) {
 
@@ -331,7 +333,7 @@ public class EventInfoFragment extends Fragment {
     public void setButton (View view) {
 
         Button join = view.findViewById(R.id.join);
-        deleteButton = (Button) view.findViewById(R.id.delete);
+        Button deleteButton = view.findViewById(R.id.delete);
         deleteButton.setVisibility(View.GONE);
 
         if (owner_id == event_owner_id) {
