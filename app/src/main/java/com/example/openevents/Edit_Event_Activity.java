@@ -39,11 +39,10 @@ public class Edit_Event_Activity extends AppCompatActivity implements AdapterVie
     private EditText endTime;
     private EditText location;
     private EditText image;
-    private int n_participators;
+    private EditText participants;
     private String eventStart_date;
     private String eventEnd_date;
     private int id;
-    private Spinner spinner;
     private ArrayList<String> infoEvent = new ArrayList<>();
 
     private String titleOk;
@@ -51,6 +50,7 @@ public class Edit_Event_Activity extends AppCompatActivity implements AdapterVie
     private String locationOk;
     private String categoryOk;
     private String imageOk;
+    private int n_participators;
 
     public void changeActivity () {
         onBackPressed();
@@ -73,6 +73,7 @@ public class Edit_Event_Activity extends AppCompatActivity implements AdapterVie
         endTime =  (EditText) findViewById(R.id.editEndTime);
         location = (EditText) findViewById(R.id.editLocation);
         image = (EditText) findViewById(R.id.editImageEvent);
+        participants = (EditText) findViewById(R.id.editNumParticipants);
 
         id = Integer.parseInt(infoEvent.get(0));
         title.setHint(infoEvent.get(1));
@@ -82,6 +83,7 @@ public class Edit_Event_Activity extends AppCompatActivity implements AdapterVie
         eventStart_date = infoEvent.get(3);
         eventEnd_date = infoEvent.get(4);
         n_participators = Integer.parseInt(infoEvent.get(5));
+        participants.setHint(infoEvent.get(5));
         location.setHint(infoEvent.get(6));
         locationOk = infoEvent.get(6);
         imageOk = infoEvent.get(7);
@@ -106,6 +108,10 @@ public class Edit_Event_Activity extends AppCompatActivity implements AdapterVie
 
         if (!image.getText().toString().equals("")) {
             imageOk = image.getText().toString();
+        }
+
+        if (!participants.getText().toString().equals("")) {
+            n_participators = Integer.parseInt(participants.getText().toString());
         }
 
         if (!category.equals("Categories")) {
@@ -172,7 +178,7 @@ public class Edit_Event_Activity extends AppCompatActivity implements AdapterVie
     }
 
     public void setSpinner () {
-        spinner = (Spinner) findViewById(R.id.createCategory);
+        Spinner spinner = (Spinner) findViewById(R.id.createCategory);
         spinner.setOnItemSelectedListener(this);
     }
 

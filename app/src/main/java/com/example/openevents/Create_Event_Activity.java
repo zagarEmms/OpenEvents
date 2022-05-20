@@ -47,7 +47,7 @@ public class Create_Event_Activity extends AppCompatActivity implements AdapterV
     private EditText endTime;
     private EditText location;
     private EditText image;
-    private int n_participators;
+    private EditText participants;
     private String eventStart_date;
     private String eventEnd_date;
     private Spinner spinner;
@@ -73,7 +73,7 @@ public class Create_Event_Activity extends AppCompatActivity implements AdapterV
         endTime =  (EditText) findViewById(R.id.createEndTime);
         location = (EditText) findViewById(R.id.createLocation);
         image = (EditText) findViewById(R.id.createImage);
-        n_participators = 0;
+        participants = (EditText) findViewById(R.id.createParticipants);
 
         eventStart_date = startDate.getText().toString() + ", " + startTime.getText().toString();
         eventEnd_date = endDate.getText().toString() + ", " + endTime.getText().toString();
@@ -81,7 +81,7 @@ public class Create_Event_Activity extends AppCompatActivity implements AdapterV
         Log.i("GET","START SELECTED: " + eventStart_date);
         Log.i("GET","END SELECTED: " + eventEnd_date);
 
-        EventCreation event = new EventCreation(title.getText().toString(), image.getText().toString(), location.getText().toString(), description.getText().toString(), eventStart_date, eventEnd_date, n_participators, category);
+        EventCreation event = new EventCreation(title.getText().toString(), image.getText().toString(), location.getText().toString(), description.getText().toString(), eventStart_date, eventEnd_date, Integer.parseInt(participants.getText().toString()), category);
 
         APIClient.getInstance().createEvent(getToken(), event, new Callback<Event>() {
             @Override

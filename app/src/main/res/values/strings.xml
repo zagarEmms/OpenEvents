@@ -57,6 +57,7 @@
     <string name="edit_profile_image">Image (min length 8)</string>
     <string name="edit_profile_button">EDIT PROFILE</string>
     <string name="edit_profile_text">(fill password for confirmation or change it)</string>
+    <string name="edit_event_participants">Num Participants</string>
 
 
     <string-array name="dropCategories">
