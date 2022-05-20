@@ -1,9 +1,11 @@
 package com.example.openevents.recyclerView;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -12,7 +14,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.openevents.R;
 import com.example.openevents.business.User;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class ListAdapterPeople extends RecyclerView.Adapter<ListAdapterPeople.ViewHolder> {
 
@@ -40,7 +46,27 @@ public class ListAdapterPeople extends RecyclerView.Adapter<ListAdapterPeople.Vi
     @Override
     public void onBindViewHolder(@NonNull ListAdapterPeople.ViewHolder holder, int position) {
         holder.name.setText(peopleArrayList.get(position).getName());
+        Log.i("person", ""+peopleArrayList.get(position).getName());
         holder.last_name.setText(peopleArrayList.get(position).getLastName());
+        Log.i("person", peopleArrayList.get(position).getImageUrl());
+
+        try {
+            Picasso.get()
+                    .load(peopleArrayList.get(position).getImageUrl())
+                    .into(holder.personImage, new Callback() {
+                        @Override
+                        public void onSuccess() {
+
+                        }
+
+                        @Override
+                        public void onError(Exception e) {
+                            holder.personImage.setImageResource(R.drawable.sofia);
+                        }
+                    });
+        } catch (IllegalArgumentException iae) {
+            holder.personImage.setImageResource(R.drawable.sofia);
+        }
     }
 
     @Override
@@ -52,6 +78,7 @@ public class ListAdapterPeople extends RecyclerView.Adapter<ListAdapterPeople.Vi
 
         private TextView name;
         private TextView last_name;
+        private ImageView personImage;
 
         private LinearLayout linearLayout;
         private MyOnClickListener listener;
@@ -61,6 +88,7 @@ public class ListAdapterPeople extends RecyclerView.Adapter<ListAdapterPeople.Vi
 
             name = itemView.findViewById(R.id.itemName);
             last_name = itemView.findViewById(R.id.itemLast);
+            personImage = itemView.findViewById(R.id.personImg);
 
             linearLayout = itemView.findViewById(R.id.layout_id);
 

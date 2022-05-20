@@ -105,6 +105,7 @@ public class PeopleFragment extends Fragment implements MyOnClickListener {
         personInfo.add(peopleArrayList.get(position).getName());
         personInfo.add(peopleArrayList.get(position).getLastName());
         personInfo.add(peopleArrayList.get(position).getEmail());
+        personInfo.add(peopleArrayList.get(position).getImageUrl());
 
         bundle.putStringArrayList("PEOPLE_INFO", personInfo);
 

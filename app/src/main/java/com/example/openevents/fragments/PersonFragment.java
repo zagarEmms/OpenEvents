@@ -3,6 +3,7 @@ package com.example.openevents.fragments;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +25,7 @@ import com.example.openevents.business.User;
 import com.example.openevents.business.UserEventRequest;
 import com.example.openevents.recyclerView.ListAdapterPeople;
 import com.example.openevents.recyclerView.MyOnClickListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -44,6 +47,7 @@ public class PersonFragment extends Fragment implements MyOnClickListener {
     private TextView comments;
     private TextView commentersAvg;
     private Button follow;
+    private ImageView imagePerson;
 
     private RecyclerView recyclerView;
     private ListAdapterPeople adapterFriends;
@@ -114,6 +118,24 @@ public class PersonFragment extends Fragment implements MyOnClickListener {
         name.setText(bundle.get(2));
         lastName.setText(bundle.get(3));
         email.setText(bundle.get(4));
+       try {
+            Picasso.get()
+                    .load(bundle.get(5))
+                    .into(imagePerson, new com.squareup.picasso.Callback() {
+                        @Override
+                        public void onSuccess() {
+
+                        }
+
+                        @Override
+                        public void onError(Exception e) {
+                            imagePerson.setImageResource(R.drawable.sofia);
+                        }
+                    });
+        }  catch (IllegalArgumentException iae) {
+            imagePerson.setImageResource(R.drawable.sofia);
+        }
+
     }
 
     private void fillApiStats(Response<Statistic> response) {
@@ -142,7 +164,7 @@ public class PersonFragment extends Fragment implements MyOnClickListener {
                 } else {
                     Toast toast =
                             Toast.makeText(getContext(), "YOUR FRIENDSHIP REQUEST HAS BEEN SENT :)", Toast.LENGTH_LONG);
-                    toast.setGravity(Gravity.TOP, 0,10);
+                    toast.setGravity(Gravity.BOTTOM, 0,400);
                     toast.show();
 
                     Log.i("friend","FRIEND REQUEST WENT WELL!" + response.body());
@@ -214,6 +236,7 @@ public class PersonFragment extends Fragment implements MyOnClickListener {
         comments = v.findViewById(R.id.num_comments);
         commentersAvg = v.findViewById(R.id.comeneters);
         follow = v.findViewById(R.id.follow);
+        imagePerson = v.findViewById(R.id.image_person);
     }
 
     @Override
@@ -225,15 +248,17 @@ public class PersonFragment extends Fragment implements MyOnClickListener {
         personInfo.add(friendsArrayList.get(position).getName());
         personInfo.add(friendsArrayList.get(position).getLastName());
         personInfo.add(friendsArrayList.get(position).getEmail());
+        personInfo.add(friendsArrayList.get(position).getImageUrl());
 
         bundleFriend.putStringArrayList("PEOPLE_INFO", personInfo);
 
         PersonFragment personFragment = new PersonFragment();
         personFragment.setArguments(bundleFriend);
 
-        Fragment currentFragment = getActivity().getSupportFragmentManager().findFragmentById(R.id.flFragment);
-        FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.attach(currentFragment);
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.flFragment, personFragment);
+        fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
 
     }

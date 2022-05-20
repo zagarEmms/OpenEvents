@@ -19,7 +19,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.openevents.Comment_Rate_Activity;
-import com.example.openevents.Create_Event_Activity;
 import com.example.openevents.Edit_Event_Activity;
 import com.example.openevents.R;
 import com.example.openevents.api.APIClient;
@@ -170,19 +169,23 @@ public class EventInfoFragment extends Fragment {
         location.setText(response.body().get(0).getLocation());
         type.setText(response.body().get(0).getType());
 
-        Picasso.get()
-                .load(response.body().get(0).getImage())
-                .into(imageView, new com.squareup.picasso.Callback() {
-                    @Override
-                    public void onSuccess() {
+        try {
+            Picasso.get()
+                    .load(response.body().get(0).getImage())
+                    .into(imageView, new com.squareup.picasso.Callback() {
+                        @Override
+                        public void onSuccess() {
 
-                    }
+                        }
 
-                    @Override
-                    public void onError(Exception e) {
-                        imageView.setImageResource(R.drawable.santamonica_photo);
-                    }
-                });
+                        @Override
+                        public void onError(Exception e) {
+                            imageView.setImageResource(R.drawable.santamonica_photo);
+                        }
+                    });
+        } catch (IllegalArgumentException iae) {
+            imageView.setImageResource(R.drawable.sofia);
+        }
 
         eventInfo.add(String.valueOf(id));
         eventInfo.add(response.body().get(0).getName());

@@ -164,6 +164,9 @@ public class SearchEventFragment extends Fragment implements MyOnClickListener {
     public void myOnClick(View view, int position) {
         int id = eventArrayList.get(position).getId();
         int owner_id = eventArrayList.get(position).getOwner_id();
+        Log.i("ID", ""+id);
+        Log.i("ID", ""+owner_id);
+
         ArrayList<String> eventInfo = new ArrayList<>();
         eventInfo.add(token);
         eventInfo.add(String.valueOf(id));

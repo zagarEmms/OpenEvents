@@ -18,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +30,7 @@ import com.example.openevents.business.Statistic;
 import com.example.openevents.business.User;
 import com.example.openevents.recyclerView.ListAdapterPeople;
 import com.example.openevents.recyclerView.MyOnClickListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -47,6 +49,8 @@ public class ProfileFragment extends Fragment implements MyOnClickListener {
     private TextView score;
     private TextView comments;
     private TextView commentersAvg;
+    private ImageView profileImg;
+
 
     private Button editProfile;
     private Button logOut;
@@ -105,6 +109,24 @@ public class ProfileFragment extends Fragment implements MyOnClickListener {
         name.setText(response.body().get(0).getName());
         lastName.setText(response.body().get(0).getLastName());
         email.setText(response.body().get(0).getEmail());
+        try {
+            Picasso.get()
+                    .load(response.body().get(0).getImageUrl())
+                    .into(profileImg, new com.squareup.picasso.Callback() {
+                        @Override
+                        public void onSuccess() {
+
+                        }
+
+                        @Override
+                        public void onError(Exception e) {
+                            profileImg.setImageResource(R.drawable.sofia);
+                        }
+                    });
+
+        }  catch (IllegalArgumentException iae) {
+            profileImg.setImageResource(R.drawable.sofia);
+        }
 
         profileInfo.add(response.body().get(0).getName());
         profileInfo.add(response.body().get(0).getLastName());
@@ -162,11 +184,6 @@ public class ProfileFragment extends Fragment implements MyOnClickListener {
                     toast.show();
 
                 } else {
-                    Toast toast =
-                            Toast.makeText(getContext(), "YOUR FRIENDS MAY APPEAR HERE", Toast.LENGTH_LONG);
-                    toast.setGravity(Gravity.TOP, 0,900);
-                    toast.show();
-
                     friendsArrayList.addAll(response.body());
                     Log.i("GET","MY FRIENDS WENT WELL!" + response.body());
 
@@ -239,6 +256,7 @@ public class ProfileFragment extends Fragment implements MyOnClickListener {
         name = v.findViewById(R.id.profile_name);
         lastName = v.findViewById(R.id.profile_last_name);
         email = v.findViewById(R.id.email);
+        profileImg = v.findViewById(R.id.imageProfile);
         score = v.findViewById(R.id.score);
         comments = v.findViewById(R.id.num_comments);
         commentersAvg = v.findViewById(R.id.comeneters);

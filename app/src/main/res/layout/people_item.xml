@@ -22,8 +22,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:layout_height="70dp"
-            android:id="@+id/itemImg"
-            app:srcCompat="@drawable/sofia"
+            android:id="@+id/personImg"
             android:scaleType="centerCrop"
             app:cardCornerRadius="10dp" />
 

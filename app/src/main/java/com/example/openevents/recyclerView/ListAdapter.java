@@ -54,19 +54,23 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         holder.eventImage.setImageResource(R.drawable.santamonica_photo);
 
         Log.i("image", ""+ eventsArrayList.get(position).getImage());
-        Picasso.get()
-                .load(eventsArrayList.get(position).getImage())
-                .into(holder.eventImage, new Callback() {
-                    @Override
-                    public void onSuccess() {
+        try {
+            Picasso.get()
+                    .load(eventsArrayList.get(position).getImage())
+                    .into(holder.eventImage, new Callback() {
+                        @Override
+                        public void onSuccess() {
 
-                    }
+                        }
 
-                    @Override
-                    public void onError(Exception e) {
-                        holder.eventImage.setImageResource(R.drawable.santamonica_photo);
-                    }
-                });
+                        @Override
+                        public void onError(Exception e) {
+                            holder.eventImage.setImageResource(R.drawable.santamonica_photo);
+                        }
+                    });
+        } catch (IllegalArgumentException iae) {
+            holder.eventImage.setImageResource(R.drawable.sofia);
+        }
     }
 
     @Override
