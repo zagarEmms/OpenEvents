@@ -37,6 +37,7 @@ public class SearchEventFragment extends Fragment implements MyOnClickListener {
     private ArrayList<Event> eventArrayList = new ArrayList<>();
     private String token;
     private ListAdapter adapter;
+    private int owner_id;
 
     private EditText keywordSearch;
     private EditText locationSearch;
@@ -138,6 +139,7 @@ public class SearchEventFragment extends Fragment implements MyOnClickListener {
         configView(v);
 
         token = getArguments().getStringArrayList("EVENT_INFO").get(0);
+        owner_id = Integer.parseInt (getArguments().getStringArrayList("EVENT_INFO").get(1));
 
         recyclerView = v.findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
@@ -163,7 +165,6 @@ public class SearchEventFragment extends Fragment implements MyOnClickListener {
     @Override
     public void myOnClick(View view, int position) {
         int id = eventArrayList.get(position).getId();
-        int owner_id = eventArrayList.get(position).getOwner_id();
         Log.i("ID", ""+id);
         Log.i("ID", ""+owner_id);
 
