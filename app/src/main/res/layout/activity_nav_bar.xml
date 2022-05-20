@@ -25,6 +25,7 @@
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintHorizontal_bias="0.5"
       app:layout_constraintStart_toStartOf="parent"
+      android:background="@drawable/customized_menu"
       app:menu="@menu/bottom_nav_bar"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
