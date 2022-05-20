@@ -1,7 +1,5 @@
 package com.example.openevents.fragments;
 
-import android.annotation.SuppressLint;
-import android.media.Image;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;

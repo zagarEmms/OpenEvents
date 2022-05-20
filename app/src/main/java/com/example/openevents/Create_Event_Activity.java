@@ -1,15 +1,10 @@
 package com.example.openevents;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NavUtils;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -23,12 +18,6 @@ import android.widget.Toast;
 import com.example.openevents.api.APIClient;
 import com.example.openevents.business.Event;
 import com.example.openevents.business.EventCreation;
-import com.example.openevents.business.Token;
-import com.example.openevents.business.User;
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-
-import org.w3c.dom.Element;
 
 import retrofit2.Call;
 import retrofit2.Callback;

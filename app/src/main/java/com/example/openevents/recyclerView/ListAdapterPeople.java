@@ -18,7 +18,6 @@ import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 public class ListAdapterPeople extends RecyclerView.Adapter<ListAdapterPeople.ViewHolder> {
 

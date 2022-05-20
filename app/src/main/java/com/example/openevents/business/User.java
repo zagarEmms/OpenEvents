@@ -1,7 +1,5 @@
 package com.example.openevents.business;
 
-import android.text.Editable;
-
 import java.io.Serializable;
 
 public class User implements Serializable {

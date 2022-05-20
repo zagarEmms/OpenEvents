@@ -9,9 +9,6 @@ import com.example.openevents.business.Token;
 import com.example.openevents.business.User;
 import com.example.openevents.business.UserCreation;
 import com.example.openevents.business.UserEventRequest;
-import com.google.gson.JsonObject;
-
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 

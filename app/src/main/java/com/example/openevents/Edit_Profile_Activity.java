@@ -13,8 +13,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.openevents.api.APIClient;
-import com.example.openevents.business.Event;
-import com.example.openevents.business.EventCreation;
 import com.example.openevents.business.User;
 import com.example.openevents.business.UserCreation;
 

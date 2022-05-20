@@ -15,14 +15,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.openevents.R;
 import com.example.openevents.api.APIClient;
 import com.example.openevents.business.Event;
 import com.example.openevents.recyclerView.ListAdapter;
-import com.example.openevents.recyclerView.ListAdapterPeople;
 import com.example.openevents.recyclerView.MyOnClickListener;
 
 import java.util.ArrayList;
