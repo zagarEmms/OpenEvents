@@ -70,36 +70,47 @@ public class Create_Event_Activity extends AppCompatActivity implements AdapterV
         Log.i("GET","START SELECTED: " + eventStart_date);
         Log.i("GET","END SELECTED: " + eventEnd_date);
 
-        EventCreation event = new EventCreation(title.getText().toString(), image.getText().toString(), location.getText().toString(), description.getText().toString(), eventStart_date, eventEnd_date, Integer.parseInt(participants.getText().toString()), category);
+        if (!participants.getText().toString().equals("")) {
 
-        APIClient.getInstance().createEvent(getToken(), event, new Callback<Event>() {
-            @Override
-            public void onResponse(Call<Event> call, Response<Event> response) {
+            EventCreation event = new EventCreation(title.getText().toString(), image.getText().toString(), location.getText().toString(), description.getText().toString(), eventStart_date, eventEnd_date, Integer.parseInt(participants.getText().toString()), category);
 
-                if (response.body() == null) {
-                    Toast toast1 =
-                            Toast.makeText(getApplicationContext(),
-                                    "SOMETHING MISSING!", Toast.LENGTH_SHORT);
+            APIClient.getInstance().createEvent(getToken(), event, new Callback<Event>() {
+                @Override
+                public void onResponse(Call<Event> call, Response<Event> response) {
 
-                    toast1.setGravity(Gravity.TOP, 0, 0);
-                    toast1.show();
-                } else {
-                    Log.i("GET","GET WENT WELL!\n" + response.body().getName());
-                    changeActivity();
+                    if (response.body() == null) {
+                        Toast toast1 =
+                                Toast.makeText(getApplicationContext(),
+                                        "SOMETHING MISSING!", Toast.LENGTH_SHORT);
+
+                        toast1.setGravity(Gravity.TOP, 0, 0);
+                        toast1.show();
+                    } else {
+                        Log.i("GET","GET WENT WELL!\n" + response.body().getName());
+                        changeActivity();
+                    }
                 }
-            }
 
-            @Override
-            public void onFailure(Call<Event> call, Throwable t) {
-                Log.i("GET","KO!");
-                Toast toast2 =
-                        Toast.makeText(getApplicationContext(),
-                                "CONNECTION ERROR!", Toast.LENGTH_SHORT);
+                @Override
+                public void onFailure(Call<Event> call, Throwable t) {
+                    Log.i("GET","KO!");
+                    Toast toast2 =
+                            Toast.makeText(getApplicationContext(),
+                                    "CONNECTION ERROR!", Toast.LENGTH_SHORT);
 
-                toast2.setGravity(Gravity.TOP, 0, 0);
-                toast2.show();
-            }
-        });
+                    toast2.setGravity(Gravity.TOP, 0, 0);
+                    toast2.show();
+                }
+            });
+
+        } else {
+            Toast toast1 =
+                    Toast.makeText(getApplicationContext(),
+                            "SOMETHING MISSING!", Toast.LENGTH_SHORT);
+
+            toast1.setGravity(Gravity.TOP, 0, 0);
+            toast1.show();
+        }
     }
 
     public void setButton () {
