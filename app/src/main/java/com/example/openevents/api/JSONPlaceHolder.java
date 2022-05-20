@@ -88,5 +88,7 @@ public interface JSONPlaceHolder {
     @PUT("users")
     Call<User> editProfile(@Header("Authorization") String token, @Body UserCreation user);
 
+    @DELETE("assistances/{user_id}/{event_id}")
+    Call<UserEventRequest> unJoinEvent(@Header("Authorization") String token, @Path("user_id") int user_id, @Path("event_id") int event_id);
 
 }

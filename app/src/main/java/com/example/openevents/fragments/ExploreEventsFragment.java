@@ -323,7 +323,6 @@ public class ExploreEventsFragment extends Fragment implements MyOnClickListener
         eventInfo.add(String.valueOf(id));
         eventInfo.add(String.valueOf(owner_id));
 
-
         bundle.putStringArrayList("EVENT_INFO",eventInfo);
 
         EventInfoFragment eventFragment = new EventInfoFragment();

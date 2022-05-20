@@ -113,4 +113,9 @@ public class APIClient {
         this.service.editProfile(token, user).enqueue(callback);
     }
 
+    public void unJoinEvent(String token, int user_id, int event_id, Callback<UserEventRequest> callback) {
+        this.service.unJoinEvent(token, user_id, event_id).enqueue(callback);
+    }
+
+
 }

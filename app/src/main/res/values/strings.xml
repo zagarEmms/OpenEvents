@@ -59,6 +59,7 @@
     <string name="edit_profile_button">EDIT PROFILE</string>
     <string name="edit_profile_text">(fill password for confirmation or change it)</string>
     <string name="edit_event_participants">Num Participants</string>
+    <string name="info_event_unjoin">UNJOIN</string>
 
 
     <string-array name="dropCategories">

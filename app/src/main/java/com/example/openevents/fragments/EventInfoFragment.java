@@ -231,17 +231,59 @@ public class EventInfoFragment extends Fragment {
         });
     }
 
+    public void unJoinEvent () {
+
+        APIClient.getInstance().unJoinEvent(token, id, owner_id, new Callback<UserEventRequest>() {
+            @Override
+            public void onResponse(Call<UserEventRequest> call, Response<UserEventRequest> response) {
+
+                if (response.body() == null) {
+                    Toast toast =
+                            Toast.makeText(getContext(), "NOT EVENT FOUND", Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.TOP, 0,300);
+                    toast.show();
+                } else {
+                    Log.i("GET","JOIN WENT WELL!" + response.body());
+                    Toast toast =
+                            Toast.makeText(getContext(), "YOU HAVE UNJOINED THE EVENT :(", Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.BOTTOM, 0,300);
+                    toast.show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UserEventRequest> call, Throwable t) {
+                Log.i("GET","JOIN KO!");
+                Toast toast =
+                        Toast.makeText(getContext(), "CONNECTION ERROR", Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.CENTER_VERTICAL, 0,0);
+                toast.show();
+            }
+        });
+
+    }
+
     public void setCommentButton (boolean isJoined, View v) {
 
         Button join = v.findViewById(R.id.join);
 
         if(isJoined) {
 
+            deleteButton.setText(R.string.info_event_unjoin);
+            deleteButton.setVisibility(View.VISIBLE);
             join.setText(getString(R.string.comment_comment));
             join.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         commentEvent();
+                    }
+                }
+            );
+
+            deleteButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        unJoinEvent();
                     }
                 }
             );
