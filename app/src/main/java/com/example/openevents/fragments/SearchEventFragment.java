@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.openevents.R;
@@ -37,6 +38,7 @@ public class SearchEventFragment extends Fragment implements MyOnClickListener {
     private ListAdapter adapter;
     private int owner_id;
 
+    private TextView txt_results;
     private EditText keywordSearch;
     private EditText locationSearch;
     private EditText dateSearch;
@@ -102,6 +104,8 @@ public class SearchEventFragment extends Fragment implements MyOnClickListener {
                 } else {
                     Log.i("GET","EVENTS WENT WELL!" + response.body());
                     eventArrayList.addAll(response.body());
+                    String results = eventArrayList.size() + " " + getString(R.string.search_results);
+                    txt_results.setText(results);
                     adapter.notifyDataSetChanged();
                 }
             }
@@ -157,6 +161,7 @@ public class SearchEventFragment extends Fragment implements MyOnClickListener {
         keywordSearch = v.findViewById(R.id.keywordSearch);
         locationSearch= v.findViewById(R.id.location_search);
         dateSearch = v.findViewById(R.id.start_date_search);
+        txt_results = v.findViewById(R.id.txt_results);
 
     }
 
