@@ -213,6 +213,7 @@ public class ProfileFragment extends Fragment implements MyOnClickListener {
               @Override
               public void onClick(View view) {
                   getContext().getSharedPreferences("TOKEN", Context.MODE_PRIVATE).edit().remove("TOKEN").apply();
+                  getContext().getSharedPreferences("ID", Context.MODE_PRIVATE).edit().remove("ID").apply();
                   Intent i = new Intent(getActivity(), MainActivity.class);
                   startActivity(i);
               }

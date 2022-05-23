@@ -11,7 +11,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -25,7 +24,6 @@ import retrofit2.Response;
 
 public class Create_Event_Activity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-    private ImageView imageUpload;
     private Button createButton;
     private EditText title;
     private EditText description;
